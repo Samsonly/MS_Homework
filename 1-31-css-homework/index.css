@@ -1,119 +1,72 @@
 body {
   background-color: black;
-  font-family: Cabin;
 }
 
 h1 {
-  font-size: xx-large;
-  text-decoration: underline;
-  color: darkgreen;
+  color: #1414eb;
+  border: solid #1414eb;
+  display: inline-block;
+  border-width: 4px;
 }
 
 h2 {
-  font-size: x-large;
-  color: green;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
+  color: #0000cc;
 }
 
 h3 {
-  font-size: medium;
-  font-weight: bold;
-  color: green;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
-  border: 15px;
-  border-color: red;
-}
-
-.shows {
-  text-wrap: wrap;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
-  border: 15px;
-  border-radius: 15px;
-  border-color: red;
-}
-
-.music {
-  text-wrap: wrap;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.books {
-  text-wrap: wrap;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.examples {
-  text-wrap: wrap;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.overall-list {
-  text-wrap: wrap;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-.micro-list {
-  text-wrap: wrap;
-  margin-left: 50px;
-}
-
-ol {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-ul {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-li {
-  color: lightgreen;
-}
-
-blockquote {
-  color: lightgreen;
-  font-style: italic;
-  font-weight: lighter;
+  color: #0000ff;
 }
 
 p {
-  color: lightgreen;
-  font-weight: bolder;
-  margin: 0.5;
+  color: #3366ff;
+  text-indent: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
-figure {
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
+li {
+  color: #3366ff;
 }
 
-figcaption {
-  color: lightgreen;
-  font-weight: bold;
-  margin: 0;
-  margin-top: 0;
-  padding-top: 0;
+.stage-manager-program {
+  text-align: center;
 }
 
-footer {
-  color: lightgreen;
-  font-weight: normal;
-  width: 275px;
-  text-align: right;
+.interface {
+  width: 700px;
+  margin-top: 50px;
+  clip-path: inset(0 15.87% 0 0);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.program-features {
+  display: block;
+  padding-left: 200px;
+}
+
+.orion {
+  width: 400px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.orion-list {
+  display: block;
+  padding-left: 200px;
+}
+
+.christmas-triggers li {
+  color: green;
+}
+
+.santa-triggers li {
+  color: red;
+}
+
+.generic-christmas-triggers li {
+  color: red;
 }

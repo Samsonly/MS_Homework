@@ -1,0 +1,119 @@
+body {
+  background-color: black;
+  font-family: Cabin;
+}
+
+h1 {
+  font-size: xx-large;
+  text-decoration: underline;
+  color: darkgreen;
+}
+
+h2 {
+  font-size: x-large;
+  color: green;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h3 {
+  font-size: medium;
+  font-weight: bold;
+  color: green;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+  border: 15px;
+  border-color: red;
+}
+
+.shows {
+  text-wrap: wrap;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+  border: 15px;
+  border-radius: 15px;
+  border-color: red;
+}
+
+.music {
+  text-wrap: wrap;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.books {
+  text-wrap: wrap;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.examples {
+  text-wrap: wrap;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.overall-list {
+  text-wrap: wrap;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.micro-list {
+  text-wrap: wrap;
+  margin-left: 50px;
+}
+
+ol {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+ul {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+li {
+  color: lightgreen;
+}
+
+blockquote {
+  color: lightgreen;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+p {
+  color: lightgreen;
+  font-weight: bolder;
+  margin: 0.5;
+}
+
+figure {
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+figcaption {
+  color: lightgreen;
+  font-weight: bold;
+  margin: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+footer {
+  color: lightgreen;
+  font-weight: normal;
+  width: 275px;
+  text-align: right;
+}

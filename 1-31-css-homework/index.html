@@ -3,20 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>200_HTML_Homework</title>
+    <title>CSS_Homework</title>
+    <link rel="stylesheet" type="text/css" href="./index.css" />
   </head>
-  <body>
-    <h1>Stage Manager Program</h1>
-    <p>
-      In addition to my homework with Mammmoth, I am also forcing myself to
-      learn JS by stumbling through an attempt at<br />
-      building a program from scratch. The dream product is massively ambitious,
-      and in reality I am more using it as a<br />
-      way to grind through the errors and problems associated with early
-      learning, but the ultimate goal of the program<br />
-      is something that will be usable by Stage Managers in theatre to handle
-      almost any typical task imaginable, such as:<br />
-    </p>
+  <>
+    <div class="stage-manager-program">
+      <div class="header">
+        <h1>Stage Manager Program</h1>
+      </div>
+    </div>
+    <div class="content">
+      <p>
+        In addition to my homework with Mammmoth, I am also forcing myself to
+        learn JS by stumbling through an attempt at building a program from
+        scratch. The dream product is massively ambitious, and in reality I am
+        more using it as a way to grind through the errors and problems
+        associated with early learning, but the ultimate goal of the program is
+        something that will be usable by Stage Managers in theatre to handle
+        almost any typical task imaginable, such as:
+      </p>
+    </div>
+    <div class="program-features">
     <ul>
       <li>Customizable Script Layouts</li>
       <li>Line Note Distribution System</li>
@@ -25,12 +32,23 @@
       <li>Report Generator</li>
       <li>Project Management Infrastructure</li>
     </ul>
+  </div>
+    <br />
+    <p>This is a general layout of the program that I have begun to work on.</p>
+    <img
+      class="interface"
+      src="https://cdn.discordapp.com/attachments/1108290097884958803/1210735322418118726/Screenshot_2024-02-23_at_5.45.33_PM.png?ex=65eba423&is=65d92f23&hm=d57a929b99f2493ead55a57692c47233d65fffa0e5f5130c77f64d0751b93c6b&"
+      alt="Main Interface"
+    />
+    <br />
+    <br />
     <p>
       Here is a picture of my son, <b>Orion</b> giving his approval of my work
       on stage (and hopefully offstage as well):
     </p>
     <img
-      src="https://scontent-msp1-1.xx.fbcdn.net/v/t39.30808-6/401357938_10168907728405427_9010642246938442000_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=jQnMzNrhvIEAX8TkM4Y&_nc_ht=scontent-msp1-1.xx&oh=00_AfCqLDK5B7nUcNsW9UDmppLyQWunW1sbuwVpIgURkTJM3Q&oe=65B5B619"
+      class="orion"
+      src="https://scontent-msp1-1.xx.fbcdn.net/v/t39.30808-6/401357938_10168907728405427_9010642246938442000_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=vZbkcVYOf8wAX8dGkTE&_nc_ht=scontent-msp1-1.xx&oh=00_AfDAY1Ex-T_UIoCnqnRYygV2AU3x-ZPiZmtndLek3uw9LQ&oe=65DD4319"
       alt="Orion on Stage"
     />
     <p>
@@ -42,30 +60,38 @@
       Orion is 18 months old, and his favorite things include (in descending
       order):
     </p>
-    <ol>
-      <li>
-        His Mom (can't entirely blame him, she's one of my favorites as well)
-      </li>
-      <li>Music (especially Sea Shanties)</li>
-      <li>Saying <em>'Ho, Ho, Ho"</em> anytime he sees:</li>
-      <ul>
-        <li>Anything wearing a long cap and has a beard</li>
+    <div class="orion-list">
+      <ol>
+        <li>
+          His Mom (can't entirely blame him, she's one of my favorites as well)
+        </li>
+        <li>Music (especially Sea Shanties)</li>
+        <li>Saying <em>'Ho, Ho, Ho"</em> anytime he sees:</li>
+        <div class="christmas-triggers">
         <ul>
-          <li>Santa</li>
-          <li>Garden Gnomes</li>
-          <li>One of the Seven Dwarves</li>
+          <li>Anything wearing a long cap and has a beard</li>
+          <div class="santa-triggers">
+          <ul>
+            <li>Santa</li>
+            <li>Garden Gnomes</li>
+            <li>One of the Seven Dwarves</li>
+          </ul>
+          </div>  
+          <li>Generic Christmas Decorations</li>
+          <div class="generic-christmas-triggers">
+          <ul>
+            <li>Red/Green</li>
+            <li>Excessive Snow Flakes</li>
+            <li>Tinsel</li>
+          </ul>
+          </div>
+          <li>Reindeer</li>
         </ul>
-        <li>Generic Christmas Decorations</li>
-        <ul>
-          <li>Red/Green</li>
-          <li>Excessive Snow Flakes</li>
-          <li>Tinsel</li>
-        </ul>
-        <li>Reindeer</li>
-      </ul>
-      <li>Throwing his food on the floor during lunchtime</li>
-      <li>Dad</li>
-    </ol>
+      </div>
+        <li>Throwing his food on the floor during lunchtime</li>
+        <li>Dad</li>
+      </ol>
+    </div>
     <p>
       (I may have skipped a few things just to get my name up there, but you get
       the point)
