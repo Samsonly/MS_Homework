@@ -1,0 +1,25 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: #460101;
+}
+
+h2 {
+  color: #7c0303;
+}
+
+h3 {
+  color: red;
+}
+
+p {
+  color: #ec6e6e;
+  border: 5px solid ec6e6e;
+  max-width: 50%;
+}
+
+li {
+  color: #ec6e6e;
+}

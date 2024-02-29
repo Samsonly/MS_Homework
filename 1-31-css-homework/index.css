@@ -1,0 +1,72 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: #1414eb;
+  border: solid #1414eb;
+  display: inline-block;
+  border-width: 4px;
+}
+
+h2 {
+  color: #0000cc;
+}
+
+h3 {
+  color: #0000ff;
+}
+
+p {
+  color: #3366ff;
+  text-indent: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+li {
+  color: #3366ff;
+}
+
+.stage-manager-program {
+  text-align: center;
+}
+
+.interface {
+  width: 700px;
+  margin-top: 50px;
+  clip-path: inset(0 15.87% 0 0);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.program-features {
+  display: block;
+  padding-left: 200px;
+}
+
+.orion {
+  width: 400px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.orion-list {
+  display: block;
+  padding-left: 200px;
+}
+
+.christmas-triggers li {
+  color: green;
+}
+
+.santa-triggers li {
+  color: red;
+}
+
+.generic-christmas-triggers li {
+  color: red;
+}
