@@ -19,9 +19,6 @@ h3 {
 
 p {
   color: #3366ff;
-  text-indent: 20px;
-  padding-left: 100px;
-  padding-right: 100px;
 }
 
 li {
@@ -32,13 +29,30 @@ li {
   text-align: center;
 }
 
-.interface {
-  width: 700px;
-  margin-top: 50px;
-  clip-path: inset(0 15.87% 0 0);
-  display: block;
+.interface-section {
+  display: flex;
+  /* border: solid #1414eb; */
+  /* border-width: 4px; */
   margin-left: auto;
   margin-right: auto;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+}
+
+.interface-header {
+  margin: 0;
+  padding: 0;
+}
+
+.interface {
+  width: 75%;
+  margin-top: 50px;
+  display: flex;
+  margin: auto;
+  padding: 10px;
+  /* border: solid #1414eb; */
+  border-width: 3px;
 }
 
 .program-features {
@@ -52,6 +66,10 @@ li {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+#fam {
+  width: 300px;
 }
 
 .orion-list {
