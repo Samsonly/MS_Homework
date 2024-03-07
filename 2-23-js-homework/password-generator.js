@@ -169,7 +169,7 @@ lengthSlider.onmousedown = function (event) {
   };
 };
 
-lengthValue.addEventListener("input", function (event) {
+lengthValue.addEventListener("input", function () {
   let number = parseInt(this.value);
   if (isNaN(number)) return;
 
