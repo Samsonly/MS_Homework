@@ -1,0 +1,512 @@
+body {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 40px;
+}
+
+#heading-box {
+  border: solid white;
+  border-width: 1px;
+  display: flex;
+  justify-content: center;
+  height: 100px;
+}
+
+#top-battle-box {
+  display: flex;
+  border: solid white;
+  justify-content: space-around;
+  align-items: center;
+  border-width: 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+  flex: 1;
+  padding-top: 10px;
+}
+
+#bottom-battle-box {
+  display: flex;
+  border: solid white;
+  border-width: 1px;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  flex: 1;
+}
+
+#footer-box {
+  border: solid white;
+  border-width: 1px;
+  display: flex;
+  height: 100px;
+}
+
+.water {
+  border: solid 2px blue;
+}
+
+.fire {
+  border: solid 2px red;
+}
+
+.earth {
+  border: solid 4px green;
+}
+
+.fighter-box {
+  display: flex;
+  align-items: flex-start;
+  border: solid 5px black;
+  padding: 10px;
+}
+
+.fighter {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+}
+
+#alex {
+  align-self: flex-end;
+}
+
+#felix {
+  align-self: flex-start;
+}
+
+#edh {
+  width: 150px;
+  height: 150px;
+}
+
+#edi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#edd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#ewh {
+  width: 150px;
+  height: 150px;
+}
+
+#ewi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#ewd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#frh {
+  width: 150px;
+  height: 150px;
+}
+
+#fri {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#frd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#fmh {
+  width: 150px;
+  height: 150px;
+}
+
+#fmi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#fmd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#whh {
+  width: 150px;
+  height: 150px;
+}
+
+#whi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#whd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#wsh {
+  width: 150px;
+  height: 150px;
+}
+
+#wsi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#wsd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+.hit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 0, 0, 0.25);
+  display: none;
+}
+
+.heal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 255, 42, 0.25);
+  display: none;
+}
+
+.dead-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(176, 190, 178, 0.5);
+  display: none;
+}
+
+.status {
+  display: flex;
+  flex-direction: row;
+  border: solid 1px white;
+}
+
+.stats {
+  color: white;
+  font-size: 12px;
+  line-height: 0.8;
+  padding-left: 5px;
+  width: 60%;
+}
+
+.buff-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 40%;
+}
+
+.buffs {
+  display: flex;
+  flex-direction: column;
+}
+
+.random-buff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.speed-buff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.attack-buff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.defense-buff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.heal-buff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.debuffs {
+  display: flex;
+  flex-direction: column;
+}
+
+.burn-debuff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.speed-debuff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.attack-debuff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.defense-debuff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+.stun-debuff {
+  width: 15px;
+  height: 15px;
+  display: none;
+}
+
+#log {
+  width: 100%;
+  padding-left: 10px;
+  color: white;
+  line-height: 0;
+  font-size: 18px;
+  overflow: auto;
+}
+
+.skill-box {
+  height: 150px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.special-skill-box {
+  height: 150px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.skill-1-box {
+  position: relative;
+}
+
+.skill-1 {
+  width: 40px;
+  height: 40px;
+}
+
+.skill-1-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.skill-1-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.skill-1-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.skill-2-box {
+  position: relative;
+}
+
+.skill-2 {
+  width: 40px;
+  height: 40px;
+}
+
+.skill-2-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.skill-2-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.skill-2-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.skill-3-box {
+  position: relative;
+}
+
+.skill-3 {
+  width: 40px;
+  height: 40px;
+}
+
+.skill-3-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.skill3-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.skill-3-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.skill-s1-box {
+  position: relative;
+}
+
+.skill-s1 {
+  width: 40px;
+  height: 40px;
+}
+
+.skill-s1-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.skill-s1-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.skill-s1-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.skill-s2-box {
+  position: relative;
+}
+
+.skill-s2 {
+  width: 40px;
+  height: 40px;
+}
+
+.skill-s2-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.skill-s2-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.skill-s2-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
