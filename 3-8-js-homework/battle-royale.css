@@ -10,7 +10,9 @@ body {
 h1 {
   color: white;
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
+  line-height: 0.4;
+  text-wrap: nowrap;
 }
 
 #heading-box {
@@ -18,19 +20,19 @@ h1 {
   border-width: 1px;
   display: flex;
   justify-content: center;
-  height: 100px;
+  align-items: center;
+  height: 80px;
+  flex-wrap: nowrap;
 }
 
 #top-battle-box {
   display: flex;
   border: solid white;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   border-width: 1px;
-  padding-left: 20px;
-  padding-right: 20px;
   flex: 1;
-  padding-top: 10px;
+  padding: 10px 20px;
 }
 
 #bottom-battle-box {
@@ -66,9 +68,47 @@ h1 {
 
 .fighter-box {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   border: solid 5px black;
   padding: 10px;
+}
+
+.buff-box {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 56px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 4px;
+}
+
+.image-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  line-height: 0.1;
+  padding-top: 5px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.battle-stats {
+  display: flex;
+  color: white;
+  font-size: 12px;
+  line-height: 0.1;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
 }
 
 .fighter {
@@ -80,10 +120,12 @@ h1 {
 
 #alex {
   align-self: flex-end;
+  margin-top: 60px;
 }
 
 #felix {
   align-self: flex-start;
+  margin-bottom: 60px;
 }
 
 #edh {
@@ -222,91 +264,108 @@ h1 {
   display: flex;
   flex-direction: row;
   border: solid 1px white;
+  border-radius: 3px;
 }
 
 .stats {
+  display: flex;
+  flex-direction: column;
   color: white;
   font-size: 12px;
-  line-height: 0.8;
+  line-height: 0.1;
   padding-left: 5px;
   width: 60%;
 }
 
-.buff-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 40%;
-}
-
 .buffs {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 2px;
 }
 
 .random-buff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .speed-buff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .attack-buff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .defense-buff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .heal-buff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .debuffs {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
 }
 
 .burn-debuff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .speed-debuff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .attack-debuff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .defense-debuff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 .stun-debuff {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
   display: none;
+  border: solid 1px white;
+  border-radius: 5px;
 }
 
 #log {
@@ -336,16 +395,19 @@ h1 {
   position: relative;
 }
 
-.skill-1-box {
+.firstSkill-box {
   position: relative;
 }
 
-.skill-1 {
+.firstSkill {
   width: 40px;
   height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.skill-1-cd {
+.firstSkill-cd {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -355,7 +417,7 @@ h1 {
   display: none;
 }
 
-.skill-1-cd-text {
+.firstSkill-cd-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -365,22 +427,25 @@ h1 {
   font-size: 25px;
 }
 
-.skill-1-btn {
+.firstSkill-btn {
   padding: 0;
   border: none;
   background: none;
 }
 
-.skill-2-box {
+.secondSkill-box {
   position: relative;
 }
 
-.skill-2 {
+.secondSkill {
   width: 40px;
   height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.skill-2-cd {
+.secondSkill-cd {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -390,7 +455,7 @@ h1 {
   display: none;
 }
 
-.skill-2-cd-text {
+.secondSkill-cd-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -400,22 +465,25 @@ h1 {
   font-size: 25px;
 }
 
-.skill-2-btn {
+.secondSkill-btn {
   padding: 0;
   border: none;
   background: none;
 }
 
-.skill-3-box {
+.thirdSkill-box {
   position: relative;
 }
 
-.skill-3 {
+.thirdSkill {
   width: 40px;
   height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.skill-3-cd {
+.thirdSkill-cd {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -425,7 +493,7 @@ h1 {
   display: none;
 }
 
-.skill3-cd-text {
+.thirdSkill-cd-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -435,22 +503,25 @@ h1 {
   font-size: 25px;
 }
 
-.skill-3-btn {
+.thirdSkill-btn {
   padding: 0;
   border: none;
   background: none;
 }
 
-.skill-s1-box {
+.firstSpecialSkill-box {
   position: relative;
 }
 
-.skill-s1 {
+.firstSpecialSkill {
   width: 40px;
   height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.skill-s1-cd {
+.firstSpecialSkill-cd {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -460,7 +531,7 @@ h1 {
   display: none;
 }
 
-.skill-s1-cd-text {
+.firstSpecialSkill-cd-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -470,22 +541,25 @@ h1 {
   font-size: 25px;
 }
 
-.skill-s1-btn {
+.firstSpecialSkill-btn {
   padding: 0;
   border: none;
   background: none;
 }
 
-.skill-s2-box {
+.secondSpecialSkill-box {
   position: relative;
 }
 
-.skill-s2 {
+.secondSpecialSkill {
   width: 40px;
   height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.skill-s2-cd {
+.secondSpecialSkill-cd {
   width: 40px;
   height: 40px;
   position: absolute;
@@ -495,7 +569,7 @@ h1 {
   display: none;
 }
 
-.skill-s2-cd-text {
+.secondSpecialSkill-cd-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -505,8 +579,96 @@ h1 {
   font-size: 25px;
 }
 
-.skill-s2-btn {
+.secondSpecialSkill-btn {
   padding: 0;
   border: none;
   background: none;
+}
+
+#log {
+  display: none;
+}
+
+.hitpoints-progress {
+  width: 100%;
+  height: 20px;
+  background-color: green;
+}
+
+.hitpoints-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.hitpoints {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hitpoints-bar {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  border: solid 1px white;
+  border-radius: 3px;
+  background-color: black;
+}
+
+.current-hitpoints {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.attack {
+  display: flex;
+  width: 50%;
+}
+.defense {
+  display: flex;
+  width: 50%;
+}
+
+.initiative-progress {
+  width: 100%;
+  height: 6px;
+
+  background-color: yellowgreen;
+  z-index: 4;
+}
+
+.initiative-container {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.initiative-bar {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 3px;
+  border: solid 1px white;
+  border-radius: 2px;
+  background-color: black;
+}
+
+#start-battle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  font-size: 60px;
+  color: blue;
+  background-color: black;
+  border: solid 2px white;
+  border-radius: 10px;
+  z-index: 10;
 }

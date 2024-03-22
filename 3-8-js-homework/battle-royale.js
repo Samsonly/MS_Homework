@@ -1,49 +1,84 @@
 let selectedSkill = null;
 
 class Fighter {
-  constructor() {
+  constructor(name, team) {
+    this.name = name;
+    this.team = team;
     this.baseHitPoints = 100;
     this.baseAttack = 50;
-    this.baseDefense = 5;
-    this.baseSpeed = 5;
-    this.attackBuff = false;
-    this.attackDebuff = false;
-    this.attackBuffCount = 0;
-    this.attackDebuffCount = 0;
-    this.defenseBuff = false;
-    this.defenseDebuff = false;
-    this.defenseBuffCount = 0;
-    this.defenseDebuffCount = 0;
+    this.baseDefense = 50;
+    this.baseSpeed = 10;
     this.initiative = 0;
-    this.speedBuff = false;
-    this.speedDebuff = false;
-    this.stunDebuff = false;
-    this.stunDebuffCount = 0;
-    this.burnDebuff = false;
-    this.burnDebuffCount = 0;
-    this.speedBuffCount = 0;
-    this.speedDebuffCount = 0;
-    this.secondSkillCount = 0;
-    this.thirdSkillCount = 0;
+    this.attackBuff = { active: false, count: 0, skill: "Attack" };
+    this.attackDebuff = { active: false, count: 0, skill: "Attack" };
+    this.defenseAvoidance = 1;
+    this.defenseBuff = { active: false, count: 0, skill: "Defense" };
+    this.defenseDebuff = { active: false, count: 0, skill: "Defense" };
+    this.speedBuff = { active: false, count: 0, skill: "Speed" };
+    this.speedDebuff = { active: false, count: 0, skill: "Speed" };
+    this.stunDebuff = { active: false, count: 0, skill: "Stun" };
+    this.burnDebuff = { active: false, count: 0, skill: "Burn" };
+    this.innateSpecial = { active: true, count: 0, cooldown: 0, skill: null }; //figure out where this should go
+    this.startOfTurnSpecial = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: null,
+    };
+    this.preAttackSpecial = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: null,
+    };
+    this.firstSkill = { active: true, count: 0, cooldown: 0 };
+    this.secondSkill = { active: true, count: 0, cooldown: 1 };
+    this.thirdSkill = { active: true, count: 0, cooldown: 2 };
+    this.firstSpecialSkill = { active: true, count: 0, cooldown: 3 };
+    this.secondSpecialSkill = { active: true, count: 0, cooldown: 5 };
+    this.postAttackSpecial = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: null,
+    };
+    this.endOfTurnSpecial = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: null,
+    };
+    this.defensiveSkill = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: null,
+    };
+    let fighterId = document.getElementById(this.name);
+    this.firstSkillButton = fighterId.querySelector(".firstSkill-btn");
+    this.secondSkillButton = fighterId.querySelector(".secondSkill-btn");
+    this.thirdSkillButton = fighterId.querySelector(".thirdSkill-btn");
+    this.firstSpecialSkillButton = fighterId.querySelector(
+      ".firstSpecialSkill-btn"
+    );
+    this.secondSpecialSkillButton = fighterId.querySelector(
+      ".secondSpecialSkill-btn"
+    );
   }
 }
 
 class Earth extends Fighter {
-  constructor(name) {
-    super();
-    this.name = name;
+  constructor(name, team) {
+    super(name, team);
     this.typeHitPoints = this.baseHitPoints;
     this.typeAttack = this.baseAttack;
     this.typeDefense = this.baseDefense;
     this.typeSpeed = this.baseSpeed;
-    let fighterId = document.getElementById(this.name);
-    this.skill1Button = fighterId.querySelector(".skill-1-btn");
-    this.skill2Button = fighterId.querySelector(".skill-2-btn");
-    this.skill3Button = fighterId.querySelector(".skill-3-btn");
-    this.skill1Button.addEventListener("click", (event) => {
+    this.type = "Earth";
+    this.firstSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.stun(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -54,11 +89,12 @@ class Earth extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.skill2Button.addEventListener("click", (event) => {
+    };
+
+    this.secondSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.defenseUp(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team !== this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -69,11 +105,12 @@ class Earth extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.skill3Button.addEventListener("click", (event) => {
+    };
+
+    this.thirdSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.slam(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -84,80 +121,47 @@ class Earth extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
+    };
   }
 
-  // stun(target) {
-  //   if (this.special) {
-  //     this.specialSkill();
-  //   }
-  //   target.stunDebuff = true;
-  //   target.stunDebuffCount = 2;
-  //   targetHit(target);
-  //   buffCountTracker(this);
-  //   updateLog(`${this.name} stunned ${target.name}`, "red");
-  //   if (this.endSpecial) {
-  //     this.endSpecialSkill();
-  //   }
-  //   endOfTurn(this);
-  // }
-
   stun(target) {
-    preAttackSpecial(this, target);
-    stunDebuff(target, 2);
-    targetHit(target);
-    updateLog(`${this.name} stunned ${target.name} for two turns`, "red");
-    buffCountTracker(this);
-    postAttackSpecial(this, target);
+    preAttackSpecial(this);
+    debuffTarget(this, target, target.stunDebuff, 2, 1);
+    attackTarget(this, target, 1.2, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.firstSkill.count = 1;
     endOfTurn(this);
   }
 
-  DefenseUp(target) {
-    preAttackSpecial(this, target);
-    defenseDebuff(target, 2);
-    buffCountTracker(this);
-    this.secondSkillCount = 1;
-    updateLog(`${this.name} increased ${target.name}'s defense!`, "green");
-    postAttackSpecial(this, target);
+  defenseUp(target) {
+    preAttackSpecial(this);
+    buffTarget(this, target, target.defenseBuff, 2, 1);
+    postAttackSpecial(this);
+    this.secondSkill.count = 2;
     endOfTurn(this);
   }
 
   slam(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    if (this.currentAttack() > target.currentDefense()) {
-      target.currentHitPoints =
-        target.currentHitPoints -
-        (this.currentAttack() - target.currentDefense());
-    }
-    targetHit(target);
-    buffCountTracker(this);
-    this.thirdSkillCount = 2;
-    updateLog(`${this.name} slammed ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    debuffTeam(this, target, target.stunDebuff, 1, 0.2);
+    attackTeam(this, target, 1.3, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.thirdSkill.count = 3;
     endOfTurn(this);
   }
 }
 
 class Water extends Fighter {
-  constructor(name) {
-    super();
-    this.name = name;
+  constructor(name, team) {
+    super(name, team);
     this.typeHitPoints = this.baseHitPoints;
     this.typeAttack = this.baseAttack;
     this.typeDefense = this.baseDefense;
     this.typeSpeed = this.baseSpeed;
-    let fighterId = document.getElementById(this.name);
-    this.skill1Button = fighterId.querySelector(".skill-1-btn");
-    this.skill2Button = fighterId.querySelector(".skill-2-btn");
-    this.skill3Button = fighterId.querySelector(".skill-3-btn");
-    this.skill1Button.addEventListener("click", (event) => {
+    this.firstSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.slow(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -168,11 +172,12 @@ class Water extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.skill2Button.addEventListener("click", (event) => {
+    };
+
+    this.secondSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.attackUp(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team !== this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -183,11 +188,12 @@ class Water extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.skill3Button.addEventListener("click", (event) => {
+    };
+
+    this.thirdSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.attackAll(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -198,87 +204,47 @@ class Water extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
+    };
   }
 
   slow(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    target.speedDebuff = true;
-    target.speedDebuffCount = 2;
-    targetHit(target);
-    buffCountTracker(this);
-    updateLog(`${this.name} slowed ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    debuffTarget(this, target, target.speedDebuff, 1, 1);
+    attackTarget(this, target, 1, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.firstSkill.count = 1;
     endOfTurn(this);
   }
 
   attackUp(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    allFighters.forEach((fighter) => {
-      if (fighter.team === target.team) {
-        fighter.attackBuff = true;
-        fighter.attackBuffCount = 2;
-        if (fighter === this) {
-          fighter.attackBuffCount = 3;
-        }
-        targetBuffed(fighter);
-      }
-    });
-    buffCountTracker(this);
-    this.secondSkillCount = 1;
-    updateLog(`${this.name} increased ${this.team}'s attack!`, "green");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    buffTeam(this, target, target.attackBuff, 2, 1);
+    postAttackSpecial(this);
+    this.secondSkill.count = 2;
     endOfTurn(this);
   }
 
   attackAll(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    allFighters.forEach((fighter) => {
-      if (fighter.team === target.team) {
-        if (this.currentAttack() > fighter.currentDefense()) {
-          fighter.currentHitPoints =
-            fighter.currentHitPoints -
-            (this.currentAttack() - fighter.currentDefense()) * 0.6;
-          targetHit(fighter);
-        }
-      }
-    });
-    buffCountTracker(this);
-    this.thirdSkillCount = 2;
-    updateLog(`${this.name} attacked ${target.team}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    attackTeam(this, target, 1, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.thirdSkill.count = 3;
     endOfTurn(this);
   }
 }
 
 class Fire extends Fighter {
-  constructor(name) {
-    super();
-    this.name = name;
+  constructor(name, team) {
+    super(name, team);
     this.typeHitPoints = this.baseHitPoints;
     this.typeAttack = this.baseAttack;
     this.typeDefense = this.baseDefense;
     this.typeSpeed = this.baseSpeed;
-    let fighterId = document.getElementById(this.name);
-    this.skill1Button = fighterId.querySelector(".skill-1-btn");
-    this.skill2Button = fighterId.querySelector(".skill-2-btn");
-    this.skill3Button = fighterId.querySelector(".skill-3-btn");
-    this.skill1Button.addEventListener("click", (event) => {
+    this.type = "Fire";
+    this.firstSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.scorch(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -289,11 +255,12 @@ class Fire extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.skill2Button.addEventListener("click", (event) => {
+    };
+
+    this.secondSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.weaken(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -304,12 +271,12 @@ class Fire extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
+    };
 
-    this.skill3Button.addEventListener("click", (event) => {
+    this.thirdSkillButton.clickHandler = (event) => {
       event.stopPropagation();
-      selectedSkill = (target) => this.explode(target);
-      allFighters.forEach((fighter) => {
+      selectedSkill = (target) => this.fireBomb(target);
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -320,145 +287,113 @@ class Fire extends Fighter {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
+    };
   }
 
   scorch(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    if (this.currentAttack() > target.currentDefense()) {
-      target.currentHitPoints =
-        target.currentHitPoints -
-        (this.currentAttack() - target.currentDefense()) * 0.8;
-      target.burnDebuff = true;
-      target.burnDebuffCount = 3;
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    updateLog(`${this.name} scorched ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    debuffTarget(this, target, target.burnDebuff, 3, 1);
+    attackTarget(this, target, 0.8, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.firstSkill.count = 1;
     endOfTurn(this);
   }
 
   weaken(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    allFighters.forEach((fighter) => {
-      if (fighter.team === target.team) {
-        fighter.attackDebuff = true;
-        fighter.attackDebuffCount = 2;
-        targetHit(fighter);
-      }
-    });
-    buffCountTracker(this);
-    this.secondSkillCount = 1;
-    updateLog(`${this.name} weakened ${target.team}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    debuffTeam(this, target, target.attackDebuff, 2, 0.75);
+    attackTarget(this, target, 0.8, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.secondSkill.count = 2;
     endOfTurn(this);
   }
 
-  explode(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    if (this.currentAttack() > target.currentDefense()) {
-      target.currentHitPoints =
-        target.currentHitPoints -
-        (this.currentAttack() - target.currentDefense()) * 1.5;
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    this.thirdSkillCount = 2;
-    updateLog(`${this.name} exploded ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+  fireBomb(target) {
+    preAttackSpecial(this);
+    attackTarget(this, target, 1.1, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.thirdSkill.count = 3;
     endOfTurn(this);
   }
 }
 
 class Warrior extends Earth {
   constructor(name, team) {
-    super(name);
-    this.team = team;
+    super(name, team);
     this.classHitPoints = 250 + this.typeHitPoints;
     this.currentHitPoints = this.classHitPoints;
-    this.classAttack = 25 + this.typeAttack;
+    this.classAttack = 65 + this.typeAttack;
     this.attackMultiplier = () => {
-      if (this.attackBuff) {
+      if (this.attackBuff.active) {
         return 1.2;
-      } else if (this.attackDebuff) {
+      } else if (this.attackDebuff.active) {
         return 0.8;
       } else {
         return 1;
       }
     };
     this.currentAttack = () => {
-      return this.classAttack * this.attackMultiplier();
+      return Math.floor(this.classAttack * this.attackMultiplier());
     };
     this.classDefense = 40 + this.typeDefense;
     this.defenseMultiplier = () => {
-      if (this.defenseBuff) {
-        return this.classDefense * 1.4;
-      } else if (this.defenseDebuff) {
-        return this.classDefense * 0.6;
-      } else {
+      if (this.defenseBuff.active) {
+        return 1.6;
+      } else if (this.defenseDebuff.active) {
         return 1;
+      } else {
+        return 1.3;
       }
     };
     this.currentDefense = () => {
-      return this.classDefense * this.defenseMultiplier();
+      return Math.floor(this.classDefense * this.defenseMultiplier());
     };
     this.classSpeed = 5 + this.typeSpeed;
     this.speedMultiplier = () => {
-      if (this.speedBuff) {
+      if (this.speedBuff.active) {
         return 1.3;
-      } else if (this.speedDebuff) {
+      } else if (this.speedDebuff.active) {
         return 0.7;
       } else {
         return 1;
       }
     };
     this.currentSpeed = () => {
-      return this.classSpeed * this.speedMultiplier();
+      return Math.floor(this.classSpeed * this.speedMultiplier());
     };
-    this.special = true;
-    this.specialSkill = () => {
-      if (this.currentHitPoints < this.classHitPoints * 0.3) {
-        this.attackMultiplier = () => {
-          if (this.attackBuff) {
-            return this.classAttack * 3;
-          } else if (this.attackDebuff) {
-            return this.classAttack * 1.5;
-          } else {
-            return 2.5;
-          }
-        };
-      } else {
-        this.attackMultiplier = () => {
-          if (this.attackBuff) {
-            return this.classAttack * 1.2;
-          } else if (this.attackDebuff) {
-            return this.classAttack * 0.8;
-          } else {
-            return 1;
-          }
-        };
-      }
+    this.startOfTurnSpecial = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: () => {
+        if (this.currentHitPoints < this.classHitPoints * 0.3) {
+          updateLog(`${this.name} is enraged!`, "orange");
+          this.attackMultiplier = () => {
+            if (this.attackBuff.active) {
+              return 1.6;
+            } else if (this.attackDebuff.active) {
+              return 1;
+            } else {
+              return 1.3;
+            }
+          };
+        } else {
+          this.attackMultiplier = () => {
+            if (this.attackBuff.active) {
+              return 1.2;
+            } else if (this.attackDebuff.active) {
+              return 0.8;
+            } else {
+              return 1;
+            }
+          };
+        }
+      },
     };
-    let fighterId = document.getElementById(this.name);
-    this.specialSkill1Button = fighterId.querySelector(".skill-s1-btn");
-    this.specialSkill2Button = fighterId.querySelector(".skill-s2-btn");
-    this.specialSkill1Button.addEventListener("click", (event) => {
+    this.firstSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
-      selectedSkill = (target) => this.enrageSlam(target);
-      allFighters.forEach((fighter) => {
+      selectedSkill = (target) => this.enragedSlam(target);
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -469,12 +404,12 @@ class Warrior extends Earth {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.firstSpecialSkillCount = 0;
-    this.specialSkill2Button.addEventListener("click", (event) => {
+    };
+    this.firstSpecialSkill.count = 0;
+    this.secondSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.beserk(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -485,125 +420,95 @@ class Warrior extends Earth {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.secondSpecialSkillCount = 0;
+    };
+    this.secondSpecialSkill.count = 0;
   }
 
-  enrageSlam(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    allFighters.forEach((fighter) => {
-      if (fighter.team === target.team) {
-        if (this.currentAttack() > fighter.currentDefense()) {
-          fighter.currentHitPoints =
-            fighter.currentHitPoints -
-            (this.currentAttack() - fighter.currentDefense()) * 0.6;
-          targetHit(fighter);
-        }
-      }
-    });
-    buffCountTracker(this);
-    this.firstSpecialSkillCount = 3;
-    updateLog(`${this.name} enrageSlammed ${target.team}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+  enragedSlam(target) {
+    preAttackSpecial(this);
+    attackTeam(this, target, 1.2, this.defenseAvoidance);
+    postAttackSpecial(this);
+    this.firstSpecialSkill.count = 4;
     endOfTurn(this);
   }
 
   beserk(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    if (this.currentHitPoints > target.currentDefense()) {
-      target.currentHitPoints =
-        target.currentHitPoints -
-        ((this.currentHitPoints / 2) * this.attackMultiplier() -
-          target.currentDefense());
-      targetHit(target);
-      this.currentHitPoints = 1;
-      targetHit(this);
-    }
-    buffCountTracker(this);
-    this.secondSpecialSkillCount = 5;
-    updateLog(`${this.name} beserked ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    this.currentAttack = () => {
+      return Math.floor(
+        (this.currentHitPoints / 1.5) * this.attackMultiplier()
+      );
+    };
+    attackTarget(this, target, 1, this.defenseAvoidance);
+    this.currentHitPoints = this.currentHitPoints / 2;
+    targetHit(this);
+    this.currentAttack = () => {
+      return Math.floor(this.classAttack * this.attackMultiplier());
+    };
+    postAttackSpecial(this);
+    this.secondSpecialSkill.count = 6;
     endOfTurn(this);
   }
 }
 
 class Scholar extends Water {
   constructor(name, team) {
-    super(name);
-    this.team = team;
-
+    super(name, team);
     this.classHitPoints = 135 + this.typeHitPoints;
     this.currentHitPoints = this.classHitPoints;
-    this.classAttack = 75 + this.typeAttack;
+    this.classAttack = 95 + this.typeAttack;
     this.attackMultiplier = () => {
-      if (this.attackBuff) {
+      if (this.attackBuff.active) {
         return 1.2;
-      } else if (this.attackDebuff) {
+      } else if (this.attackDebuff.active) {
         return 0.8;
       } else {
         return 1;
       }
     };
     this.currentAttack = () => {
-      return this.classAttack * this.attackMultiplier();
+      return Math.floor(this.classAttack * this.attackMultiplier());
     };
     this.classDefense = 10 + this.typeDefense;
     this.defenseMultiplier = () => {
-      if (this.defenseBuff) {
-        return this.classDefense * 1.4;
-      } else if (this.defenseDebuff) {
-        return this.classDefense * 0.6;
-      } else {
+      if (this.defenseBuff.active) {
+        return 1.6;
+      } else if (this.defenseDebuff.active) {
         return 1;
+      } else {
+        return 1.3;
       }
     };
     this.currentDefense = () => {
-      return this.classDefense * this.defenseMultiplier();
+      return Math.floor(this.classDefense * this.defenseMultiplier());
     };
     this.classSpeed = 7 + this.typeSpeed;
     this.speedMultiplier = () => {
-      if (this.speedBuff) {
+      if (this.speedBuff.active) {
         return 1.3;
-      } else if (this.speedDebuff) {
+      } else if (this.speedDebuff.active) {
         return 0.7;
       } else {
         return 1;
       }
     };
     this.currentSpeed = () => {
-      return this.classSpeed * this.speedMultiplier();
+      return Math.floor(this.classSpeed * this.speedMultiplier());
     };
-    this.special = false;
-    this.endSpecial = true;
-    this.endSpecialSkill = () => {
-      if (Math.random() < 0.1) {
-        this.speedBuff = true;
-        this.speedBuffCount = 2;
-      }
-      if (Math.random() < 0.1) {
-        this.attackBuff = true;
-        this.attackBuffCount = 2;
-      }
-      if (Math.random() < 0.1) {
-        this.defenseBuff = true;
-        this.defenseBuffCount = 2;
-      }
+    this.endOfTurnSpecial = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: () => {
+        buffTarget(this, this, this.attackBuff, 2, 0.1);
+        buffTarget(this, this, this.defenseBuff, 2, 0.1);
+        buffTarget(this, this, this.speedBuff, 2, 0.1);
+      },
     };
-    let fighterId = document.getElementById(this.name);
-    this.specialSkill1Button = fighterId.querySelector(".skill-s1-btn");
-    this.specialSkill2Button = fighterId.querySelector(".skill-s2-btn");
-    this.specialSkill1Button.addEventListener("click", (event) => {
+    this.firstSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.cleanse(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team !== this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -614,12 +519,13 @@ class Scholar extends Water {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.firstSpecialSkillCount = 0;
-    this.specialSkill2Button.addEventListener("click", (event) => {
+    };
+
+    this.firstSpecialSkill.count = 0;
+    this.secondSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.refresh(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team !== this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -630,123 +536,90 @@ class Scholar extends Water {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.secondSpecialSkillCount = 0;
+    };
+
+    this.secondSpecialSkill.count = 0;
   }
 
   cleanse(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    if (target.stunDebuff) {
-      target.stunDebuff = false;
-      target.stunDebuffCount = 0;
-    }
-    if (target.burnDebuff) {
-      target.burnDebuff = false;
-      target.burnDebuffCount = 0;
-    }
-    if (target.speedDebuff) {
-      target.speedDebuff = false;
-      target.speedDebuffCount = 0;
-    }
-    if (target.attackDebuff) {
-      target.attackDebuff = false;
-      target.attackDebuffCount = 0;
-    }
-    if (target.defenseDebuff) {
-      target.defenseDebuff = false;
-      target.defenseDebuffCount = 0;
-    }
-    targetBuffed(target);
-    buffCountTracker(this);
-    this.secondSpecialSkillCount = 5;
-    updateLog(`${this.name} cleansed ${target.name}`, "green");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    cleanseTarget(target);
+    postAttackSpecial(this);
+    this.firstSpecialSkill.count = 4;
     endOfTurn(this);
   }
 
   refresh(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    allFighters.forEach((fighter) => {
-      if (fighter.team === this.team) {
-        fighter.secondSkillCount = 0;
-        fighter.thirdSkillCount = 0;
-        fighter.firstSpecialSkillCount = 0;
-        fighter.secondSpecialSkillCount = 0;
-        targetBuffed(fighter);
-      }
-    });
-    buffCountTracker(this);
-    this.secondSpecialSkillCount = 5;
-    updateLog(`${this.name} reset ${target.team}'s Abilities`, "green");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    refreshTeam(target);
+    buffTeam(this, target, target.speedBuff, 2, 1);
+    boostTeam(target, 30);
+    postAttackSpecial(this);
+    this.secondSpecialSkill.count = 6;
     endOfTurn(this);
   }
 }
 
 class Rogue extends Fire {
   constructor(name, team) {
-    super(name);
-    this.team = team;
+    super(name, team);
     this.classHitPoints = 150 + this.typeHitPoints;
     this.currentHitPoints = this.classHitPoints;
-    this.classAttack = 125 + this.typeAttack;
+    this.classAttack = 100 + this.typeAttack;
     this.attackMultiplier = () => {
-      if (this.attackBuff) {
+      if (this.attackBuff.active) {
         return 1.2;
-      } else if (this.attackDebuff) {
+      } else if (this.attackDebuff.active) {
         return 0.8;
       } else {
         return 1;
       }
     };
     this.currentAttack = () => {
-      return this.classAttack * this.attackMultiplier();
+      return Math.floor(this.classAttack * this.attackMultiplier());
     };
     this.classDefense = 30 + this.typeDefense;
     this.defenseMultiplier = () => {
-      if (this.defenseBuff) {
-        return this.classDefense * 1.4;
-      } else if (this.defenseDebuff) {
-        return this.classDefense * 0.6;
-      } else {
+      if (this.defenseBuff.active) {
+        return 1.6;
+      } else if (this.defenseDebuff.active) {
         return 1;
+      } else {
+        return 1.3;
       }
     };
     this.currentDefense = () => {
-      return this.classDefense * this.defenseMultiplier();
+      return Math.floor(this.classDefense * this.defenseMultiplier());
     };
     this.classSpeed = 10 + this.typeSpeed;
     this.speedMultiplier = () => {
-      if (this.speedBuff) {
+      if (this.speedBuff.active) {
         return 1.3;
-      } else if (this.speedDebuff) {
+      } else if (this.speedDebuff.active) {
         return 0.7;
       } else {
         return 1;
       }
     };
     this.currentSpeed = () => {
-      return this.classSpeed * this.speedMultiplier();
+      return Math.floor(this.classSpeed * this.speedMultiplier());
     };
-    this.special = true;
-    this.specialSkill = () => {
-      //special skill here
+    this.preAttackSpecial = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: () => {
+        if (this.preAttackSpecial.active) {
+          this.defenseAvoidance = 0.9;
+        } else {
+          this.defenseAvoidance = 1;
+        }
+      },
     };
-    let fighterId = document.getElementById(this.name);
-    this.specialSkill1Button = fighterId.querySelector(".skill-s1-btn");
-    this.specialSkill2Button = fighterId.querySelector(".skill-s2-btn");
-    this.specialSkill1Button.addEventListener("click", (event) => {
+    this.firstSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
-      selectedSkill = (target) => this.SPECIALSKILL1(target);
-      allFighters.forEach((fighter) => {
+      selectedSkill = (target) => this.successiveAttack(target);
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -757,12 +630,13 @@ class Rogue extends Fire {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.firstSpecialSkillCount = 0;
-    this.specialSkill2Button.addEventListener("click", (event) => {
+    };
+
+    this.firstSpecialSkill.count = 0;
+    this.secondSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
-      selectedSkill = (target) => this.SPECIALSKILL2(target);
-      allFighters.forEach((fighter) => {
+      selectedSkill = (target) => this.hamstring(target);
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -773,101 +647,89 @@ class Rogue extends Fire {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.secondSpecialSkillCount = 0;
+    };
+
+    this.secondSpecialSkill.count = 0;
   }
 
-  extendedskill1(target) {
-    if (this.special) {
-      this.specialSkill();
+  successiveAttack(target) {
+    preAttackSpecial(this);
+    attackTarget(this, target, 0.8, this.defenseAvoidance);
+    let counter = 8;
+    let counterDecimal = () => {
+      return counter / 10;
+    };
+    while (Math.random() <= counterDecimal()) {
+      attackTarget(this, target, 0.8, this.defenseAvoidance);
+      --counter;
     }
-    {
-      //  extended skill 1 logic here
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    this.firstSpecialSkillCount = 3;
-    updateLog(`${this.name} ***SKILL NAME HERE*** ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    postAttackSpecial(this);
+    this.firstSpecialSkill.count = 4;
     endOfTurn(this);
   }
 
-  extendedskill2(allFighters) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    {
-      //  extended skill 2 logic here
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    this.secondSpecialSkillCount = 5;
-    updateLog(`${this.name} ***SKILL NAME HERE*** ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+  hamstring(target) {
+    preAttackSpecial(this);
+    debuffTarget(this, target, target.speedDebuff, 1, 1);
+    attackTarget(this, target, 1.4, this.defenseAvoidance);
+    target.initiative = 0;
+    postAttackSpecial(this);
+    this.secondSpecialSkill.count = 6;
     endOfTurn(this);
   }
 }
 
 class Druid extends Earth {
   constructor(name, team) {
-    super(name);
-    this.team = team;
+    super(name, team);
     this.classHitPoints = 200 + this.typeHitPoints;
     this.currentHitPoints = this.classHitPoints;
-    this.classAttack = 50 + this.typeAttack;
+    this.classAttack = 60 + this.typeAttack;
     this.attackMultiplier = () => {
-      if (this.attackBuff) {
+      if (this.attackBuff.active) {
         return 1.2;
-      } else if (this.attackDebuff) {
+      } else if (this.attackDebuff.active) {
         return 0.8;
       } else {
         return 1;
       }
     };
     this.currentAttack = () => {
-      return this.classAttack * this.attackMultiplier();
+      return Math.floor(this.classAttack * this.attackMultiplier());
     };
     this.classDefense = 35 + this.typeDefense;
     this.defenseMultiplier = () => {
-      if (this.defenseBuff) {
-        return this.classDefense * 1.4;
-      } else if (this.defenseDebuff) {
-        return this.classDefense * 0.6;
-      } else {
+      if (this.defenseBuff.active) {
+        return 1.6;
+      } else if (this.defenseDebuff.active) {
         return 1;
+      } else {
+        return 1.3;
       }
     };
     this.currentDefense = () => {
-      return this.classDefense * this.defenseMultiplier();
+      return Math.floor(this.classDefense * this.defenseMultiplier());
     };
     this.classSpeed = 8 + this.typeSpeed;
     this.speedMultiplier = () => {
-      if (this.speedBuff) {
+      if (this.speedBuff.active) {
         return 1.3;
-      } else if (this.speedDebuff) {
+      } else if (this.speedDebuff.active) {
         return 0.7;
       } else {
         return 1;
       }
     };
     this.currentSpeed = () => {
-      return this.classSpeed * this.speedMultiplier();
+      return Math.floor(this.classSpeed * this.speedMultiplier());
     };
-    this.special = true;
-    this.specialSkill = () => {
-      this.currentHitPoints = this.currentHitPoints + 10;
+    this.startOfTurnSpecial = () => {
+      return (this.currentHitPoints = this.currentHitPoints + 10);
     };
-    let fighterId = document.getElementById(this.name);
-    this.specialSkill1Button = fighterId.querySelector(".skill-s1-btn");
-    this.specialSkill2Button = fighterId.querySelector(".skill-s2-btn");
-    this.specialSkill1Button.addEventListener("click", (event) => {
+    this.firstSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.singleHeal(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team !== this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -878,12 +740,13 @@ class Druid extends Earth {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.firstSpecialSkillCount = 0;
-    this.specialSkill2Button.addEventListener("click", (event) => {
+    };
+
+    this.firstSpecialSkill.count = 0;
+    this.secondSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
       selectedSkill = (target) => this.teamHeal(target);
-      allFighters.forEach((fighter) => {
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team !== this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -894,109 +757,84 @@ class Druid extends Earth {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.secondSpecialSkillCount = 0;
+    };
+
+    this.secondSpecialSkill.count = 0;
   }
 
   singleHeal(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    if (target.currentHitPoints > 0) {
-      target.currentHitPoints = target.classHitPoints;
-      targetBuffed(target);
-    }
-    this.firstSpecialSkillCount = 4;
-    buffCountTracker(this);
-    updateLog(`${this.name} fully healed ${target.name}`, "green");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    healTarget(this, target, 1);
+    postAttackSpecial(this);
+    this.firstSpecialSkill.count = 4;
     endOfTurn(this);
   }
 
   teamHeal(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    allFighters.forEach((fighter) => {
-      if (fighter.team === target.team) {
-        if (fighter.currentHitPoints > 0) {
-          fighter.currentHitPoints = fighter.currentHitPoints + 50;
-          if (fighter.currentHitPoints > fighter.classHitPoints) {
-            fighter.currentHitPoints = fighter.classHitPoints;
-          }
-          targetBuffed(fighter);
-        }
-      }
-    });
-    this.secondSpecialSkillCount = 6;
-    buffCountTracker(this);
-    updateLog(`${this.name} healed ${target.team} for 50 hp`, "green");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+    preAttackSpecial(this);
+    healTeam(this, target, 0.3);
+    postAttackSpecial(this);
+    this.secondSpecialSkill.count = 6;
     endOfTurn(this);
   }
 }
 
 class Hunter extends Water {
   constructor(name, team) {
-    super(name);
-    this.team = team;
-
+    super(name, team);
     this.classHitPoints = 150 + this.typeHitPoints;
     this.currentHitPoints = this.classHitPoints;
-    this.classAttack = 135 + this.typeAttack;
+    this.classAttack = 105 + this.typeAttack;
     this.attackMultiplier = () => {
-      if (this.attackBuff) {
+      if (this.attackBuff.active) {
         return 1.2;
-      } else if (this.attackDebuff) {
+      } else if (this.attackDebuff.active) {
         return 0.8;
       } else {
         return 1;
       }
     };
     this.currentAttack = () => {
-      return this.classAttack * this.attackMultiplier();
+      return Math.floor(this.classAttack * this.attackMultiplier());
     };
     this.classDefense = 20 + this.typeDefense;
     this.defenseMultiplier = () => {
-      if (this.defenseBuff) {
-        return this.classDefense * 1.4;
-      } else if (this.defenseDebuff) {
-        return this.classDefense * 0.6;
-      } else {
+      if (this.defenseBuff.active) {
+        return 1.6;
+      } else if (this.defenseDebuff.active) {
         return 1;
+      } else {
+        return 1.3;
       }
     };
     this.currentDefense = () => {
-      return this.classDefense * this.defenseMultiplier();
+      return Math.floor(this.classDefense * this.defenseMultiplier());
     };
     this.classSpeed = 11 + this.typeSpeed;
     this.speedMultiplier = () => {
-      if (this.speedBuff) {
+      if (this.speedBuff.active) {
         return 1.3;
-      } else if (this.speedDebuff) {
+      } else if (this.speedDebuff.active) {
         return 0.7;
       } else {
         return 1;
       }
     };
     this.currentSpeed = () => {
-      return this.classSpeed * this.speedMultiplier();
+      return Math.floor(this.classSpeed * this.speedMultiplier());
     };
-    this.special = true;
-    this.specialSkill = () => {
-      //special skill here
+    this.defensiveSkill = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: (attacker) => {
+        attackTarget(this, attacker, 0.5, this.defenseAvoidance);
+      },
     };
-    let fighterId = document.getElementById(this.name);
-    this.specialSkill1Button = fighterId.querySelector(".skill-s1-btn");
-    this.specialSkill2Button = fighterId.querySelector(".skill-s2-btn");
-    this.specialSkill1Button.addEventListener("click", (event) => {
+    this.firstSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
-      selectedSkill = (target) => this.SPECIALSKILL1(target);
-      allFighters.forEach((fighter) => {
+      selectedSkill = (target) => this.skillPushback(target);
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -1007,12 +845,13 @@ class Hunter extends Water {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.firstSpecialSkillCount = 0;
-    this.specialSkill2Button.addEventListener("click", (event) => {
+    };
+
+    this.firstSpecialSkill.count = 0;
+    this.secondSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
-      selectedSkill = (target) => this.SPECIALSKILL2(target);
-      allFighters.forEach((fighter) => {
+      selectedSkill = (target) => this.setTraps(target);
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -1023,101 +862,105 @@ class Hunter extends Water {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.secondSpecialSkillCount = 0;
+    };
+
+    this.secondSpecialSkill.count = 0;
   }
 
-  extendedskill1(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    {
-      //  extended skill 1 logic here
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    this.firstSpecialSkillCount = 2;
-    updateLog(`${this.name} ***SKILL NAME HERE*** ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+  skillPushback(target) {
+    preAttackSpecial(this);
+    increaseCooldowns(this, target);
+    postAttackSpecial(this);
+    this.firstSpecialSkill.count = 4;
     endOfTurn(this);
   }
 
-  extendedskill2(allFighters) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    {
-      //  extended skill 2 logic here
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    this.secondSpecialSkillCount = 4;
-    updateLog(`${this.name} ***SKILL NAME HERE*** ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+  setTraps(target) {
+    preAttackSpecial(this);
+    debuffTeam(this, target, target.stunDebuff, 1, 0.2);
+    debuffTeam(this, target, target.speedDebuff, 1, 0.2);
+    debuffTeam(this, target, target.attackDebuff, 1, 0.2);
+    debuffTeam(this, target, target.defenseDebuff, 1, 0.2);
+    debuffTeam(this, target, target.burnDebuff, 1, 0.2);
+    postAttackSpecial(this);
+    this.secondSpecialSkill.count = 6;
     endOfTurn(this);
   }
 }
 
 class Mage extends Fire {
   constructor(name, team) {
-    super(name);
-    this.team = team;
+    super(name, team);
     this.classHitPoints = 125 + this.typeHitPoints;
     this.currentHitPoints = this.classHitPoints;
-    this.classAttack = 150 + this.typeAttack;
+    this.classAttack = 120 + this.typeAttack;
     this.attackMultiplier = () => {
-      if (this.attackBuff) {
+      if (this.attackBuff.active) {
         return 1.2;
-      } else if (this.attackDebuff) {
+      } else if (this.attackDebuff.active) {
         return 0.8;
       } else {
         return 1;
       }
     };
     this.currentAttack = () => {
-      return this.classAttack * this.attackMultiplier();
+      return Math.floor(this.classAttack * this.attackMultiplier());
     };
     this.classDefense = 15 + this.typeDefense;
     this.defenseMultiplier = () => {
-      if (this.defenseBuff) {
-        return this.classDefense * 1.4;
-      } else if (this.defenseDebuff) {
-        return this.classDefense * 0.6;
-      } else {
+      if (this.defenseBuff.active) {
+        return 1.6;
+      } else if (this.defenseDebuff.active) {
         return 1;
+      } else {
+        return 1.3;
       }
     };
     this.currentDefense = () => {
-      return this.classDefense * this.defenseMultiplier();
+      return Math.floor(this.classDefense * this.defenseMultiplier());
     };
     this.classSpeed = 9 + this.typeSpeed;
     this.speedMultiplier = () => {
-      if (this.speedBuff) {
+      if (this.speedBuff.active) {
         return 1.3;
-      } else if (this.speedDebuff) {
+      } else if (this.speedDebuff.active) {
         return 0.7;
       } else {
         return 1;
       }
     };
     this.currentSpeed = () => {
-      return this.classSpeed * this.speedMultiplier();
+      return Math.floor(this.classSpeed * this.speedMultiplier());
     };
-    this.special = true;
-    this.specialSkill = () => {
-      //special skill here
+    this.defensiveSkill = {
+      active: true,
+      count: 0,
+      cooldown: 0,
+      skill: (attacker) => {
+        debuffTarget(this, attacker, attacker.stunDebuff, 1, 0.25);
+      },
     };
-    let fighterId = document.getElementById(this.name);
-    this.specialSkill1Button = fighterId.querySelector(".skill-s1-btn");
-    this.specialSkill2Button = fighterId.querySelector(".skill-s2-btn");
-    this.specialSkill1Button.addEventListener("click", (event) => {
+    this.firstSpecialSkillButton.clickHandler = (event) => {
       event.stopPropagation();
-      selectedSkill = (target) => this.SPECIALSKILL1(target);
-      allFighters.forEach((fighter) => {
+      selectedSkill = (target) => this.promote(target);
+      activeFighters.forEach((fighter) => {
+        const fighterDiv = document.getElementById(fighter.name);
+        if (fighter.team !== this.team) {
+          fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
+          fighterDiv.style.opacity = "0.5";
+        }
+        if (fighter.team === this.team) {
+          fighterDiv.addEventListener("click", fighterDiv.clickHandler);
+          fighterDiv.style.opacity = "1";
+        }
+      });
+    };
+
+    this.firstSpecialSkill.count = 0;
+    this.secondSpecialSkillButton.clickHandler = (event) => {
+      event.stopPropagation();
+      selectedSkill = (target) => this.fireStorm(target);
+      activeFighters.forEach((fighter) => {
         const fighterDiv = document.getElementById(fighter.name);
         if (fighter.team === this.team) {
           fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
@@ -1128,57 +971,27 @@ class Mage extends Fire {
           fighterDiv.style.opacity = "1";
         }
       });
-    });
-    this.firstSpecialSkillCount = 0;
-    this.specialSkill2Button.addEventListener("click", (event) => {
-      event.stopPropagation();
-      selectedSkill = (target) => this.SPECIALSKILL2(target);
-      allFighters.forEach((fighter) => {
-        const fighterDiv = document.getElementById(fighter.name);
-        if (fighter.team === this.team) {
-          fighterDiv.removeEventListener("click", fighterDiv.clickHandler);
-          fighterDiv.style.opacity = "0.5";
-        }
-        if (fighter.team !== this.team) {
-          fighterDiv.addEventListener("click", fighterDiv.clickHandler);
-          fighterDiv.style.opacity = "1";
-        }
-      });
-    });
-    this.secondSpecialSkillCount = 0;
+    };
+
+    this.secondSpecialSkill.count = 0;
   }
 
-  extendedskill1(target) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    {
-      //  extended skill 1 logic here
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    this.firstSpecialSkillCount = 3;
-    updateLog(`${this.name} ***SKILL NAME HERE*** ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+  promote(target) {
+    preAttackSpecial(this);
+    buffTarget(this, target, target.attackBuff, 2, 1);
+    boostTarget(target, 100);
+    postAttackSpecial(this);
+    this.firstSpecialSkill.count = 4;
     endOfTurn(this);
   }
 
-  extendedskill2(allFighters) {
-    if (this.special) {
-      this.specialSkill();
-    }
-    {
-      //  extended skill 2 logic here
-      targetHit(target);
-    }
-    buffCountTracker(this);
-    this.secondSpecialSkillCount = 5;
-    updateLog(`${this.name} ***SKILL NAME HERE*** ${target.name}`, "red");
-    if (this.endSpecial) {
-      this.endSpecialSkill();
-    }
+  fireStorm(target) {
+    preAttackSpecial(this);
+    attackTeam(this, target, 0.5, 0.6);
+    attackTeam(this, target, 0.5, 0.6);
+    attackTeam(this, target, 0.5, 0.6);
+    postAttackSpecial(this);
+    this.secondSpecialSkill.count = 6;
     endOfTurn(this);
   }
 }
@@ -1186,166 +999,180 @@ class Mage extends Fire {
 const warriorDiv = document.getElementById("calvin");
 const calvin = new Warrior("calvin", "Team 1");
 warriorDiv.fighter = calvin;
-warriorDiv.addEventListener("click", () => {
+warriorDiv.clickHandler = () => {
   if (selectedSkill) {
     selectedSkill(warriorDiv.fighter);
     selectedSkill = null;
   }
-});
-// let calvinHitpoints = document.getElementById("calvin-hitpoints");
-// let calvinAttack = document.getElementById("calvin-attack");
-// let calvinDefense = document.getElementById("calvin-defense");
-// let calvinFireDebuff = warriorDiv.querySelector(".burn-debuff");
-// let calvinStunDebuff = warriorDiv.querySelector(".stun-debuff");
-// calvinHitpoints.textContent = `Hitpoints: ${calvin.currentHitPoints}`;
-// calvinAttack.textContent = `Attack: ${calvin.currentAttack()}`;
-// calvinDefense.textContent = `Defense: ${calvin.currentDefense()}`;
-// calvinFireDebuff.style.display = calvin.burnDebuff ? "block" : "none";
-// calvinStunDebuff.style.display = calvin.stunDebuff ? "block" : "none";
+};
 
 const scholarDiv = document.getElementById("felix");
 const felix = new Scholar("felix", "Team 1");
 scholarDiv.fighter = felix;
-scholarDiv.addEventListener("click", () => {
+scholarDiv.clickHandler = () => {
   if (selectedSkill) {
     selectedSkill(scholarDiv.fighter);
     selectedSkill = null;
   }
-});
+};
 
 const rogueDiv = document.getElementById("clara");
 const clara = new Rogue("clara", "Team 1");
 rogueDiv.fighter = clara;
-rogueDiv.addEventListener("click", () => {
+rogueDiv.clickHandler = () => {
   if (selectedSkill) {
     selectedSkill(rogueDiv.fighter);
     selectedSkill = null;
   }
-});
+};
 
 const druidDiv = document.getElementById("fiona");
 const fiona = new Druid("fiona", "Team 2");
 druidDiv.fighter = fiona;
-druidDiv.addEventListener("click", () => {
+druidDiv.clickHandler = () => {
   if (selectedSkill) {
     selectedSkill(druidDiv.fighter);
     selectedSkill = null;
   }
-});
+};
 
 const hunterDiv = document.getElementById("alex");
 const alex = new Hunter("alex", "Team 2");
 hunterDiv.fighter = alex;
-hunterDiv.addEventListener("click", () => {
+hunterDiv.clickHandler = () => {
   if (selectedSkill) {
     selectedSkill(hunterDiv.fighter);
     selectedSkill = null;
   }
-});
+};
 
 const mageDiv = document.getElementById("maeve");
 const maeve = new Mage("maeve", "Team 2");
 mageDiv.fighter = maeve;
-mageDiv.addEventListener("click", () => {
+mageDiv.clickHandler = () => {
   if (selectedSkill) {
     selectedSkill(mageDiv.fighter);
     selectedSkill = null;
   }
-});
+};
 
 let allFighters = [calvin, felix, clara, fiona, alex, maeve];
+let activeFighters = allFighters;
+let inactiveFighters = [];
 
 let readyFighters = [];
 let currentFighter;
 
-function startOfTurn(fighter) {
-  if (fighter.startSpecial) {
-    fighter.startSpecialSkill();
-  }
-  if (fighter.fireDebuff) {
-    fighter.currentHitPoints = fighter.currentHitPoints - 10;
-  }
-  if (fighter.stunDebuff) {
-    updateLog(`${fighter.name} is stunned and cannot move`, "white");
-    if (fighter.endSpecial) {
-      fighter.endSpecialSkill();
+function buffCountTracker(fighter) {
+  const buffs = ["speedBuff", "attackBuff", "defenseBuff"];
+
+  buffs.forEach((buff) => {
+    if (fighter[buff].count > 0) {
+      fighter[buff].count--;
     }
-    endOfTurn(fighter);
-  }
-  let fighterActiveBorder = document.getElementById(fighter.name);
-  fighterActiveBorder.style.borderColor = "white";
+    if (fighter[buff].count === 0) {
+      fighter[buff].active = false;
+    }
+  });
 }
 
-function buffCountTracker(fighter) {
-  const buffCounts = [
-    "stunDebuffCount",
-    "burnDebuffCount",
-    "speedBuffCount",
-    "attackBuffCount",
-    "defenseBuffCount",
-    "defenseDebuffCount",
-    "attackDebuffCount",
-    "speedDebuffCount",
+function debuffCountTracker(fighter) {
+  const debuffs = [
+    "stunDebuff",
+    "defenseDebuff",
+    "attackDebuff",
+    "speedDebuff",
   ];
 
-  buffCounts.forEach((buffCount) => {
-    if (fighter[buffCount] > 0) {
-      fighter[buffCount]--;
+  debuffs.forEach((debuff) => {
+    if (fighter[debuff].count > 0) {
+      fighter[debuff].count--;
+    }
+    if (fighter[debuff].count === 0) {
+      fighter[debuff].active = false;
     }
   });
 }
 
 function skillCooldownTracker(fighter) {
-  const skillCounts = [
-    "secondSkillCount",
-    "thirdSkillCount",
-    "firstSpecialSkillCount",
-    "secondSpecialSkillCount",
-    "innateSkillCount",
+  const skills = [
+    "innateSpecial",
+    "startOfTurnSpecial",
+    "preAttackSpecial",
+    "firstSkill",
+    "secondSkill",
+    "thirdSkill",
+    "firstSpecialSkill",
+    "secondSpecialSkill",
+    "postAttackSpecial",
+    "endOfTurnSpecial",
   ];
 
-  skillCounts.forEach((skillCount) => {
-    if (fighter[skillCount] > 0) {
-      fighter[skillCount]--;
+  skills.forEach((skill) => {
+    if (fighter[skill].count > 0) {
+      fighter[skill].count--;
+      let skillCooldown = document.querySelector(
+        `#${fighter.name} .${skill}-cd`
+      );
+      {
+        if (skillCooldown) {
+          skillCooldown.style.display = "block";
+
+          let skillCooldownText = document.querySelector(
+            `#${fighter.name} .${skill}-cd-text`
+          );
+          skillCooldownText.textContent = fighter[skill].count;
+        }
+      }
     }
   });
 
-  if (fighter.firstSpecialSkillCount > 0) {
-    let fighterFirstSpecialSkillCooldown = document.querySelector(
-      `#${fighter.name} .skill-s1-cd`
-    );
-    fighterFirstSpecialSkillCooldown.style.display = "block";
-    let fighterFirstSpecialSkillCooldownText = document.querySelector(
-      `#${fighter.name} .skill-s1-cd-text`
-    );
-    fighterFirstSpecialSkillCooldownText.textContent =
-      fighter.firstSpecialSkillCount;
-  }
+  skills.forEach((skill) => {
+    if (fighter[skill].count === 0) {
+      let skillCooldown = document.querySelector(
+        `#${fighter.name} .${skill}-cd`
+      );
+      {
+        if (skillCooldown) {
+          skillCooldown.style.display = "none";
+
+          let skillCooldownText = document.querySelector(
+            `#${fighter.name} .${skill}-cd-text`
+          );
+          skillCooldownText.textContent = fighter[skill].count;
+        }
+      }
+    }
+  });
 }
 
-function endOfTurn(fighter) {
-  let targetActiveBorder = document.getElementById(fighter.name);
-  targetActiveBorder.style.borderColor = "black";
+const startBattleButton = document.getElementById("start-battle");
+
+startBattleButton.addEventListener("click", () => {
+  startBattleButton.style.display = "none";
+  const logDisplay = document.getElementById("log");
+  logDisplay.style.display = "block";
+  refreshUI();
+  nextTurn();
+});
+
+function tick() {
+  activeFighters.forEach((fighter) => {
+    fighter.initiative += fighter.currentSpeed();
+  });
+  refreshUI();
   nextTurn();
 }
 
-function tick(allFighters) {
-  allFighters.forEach((fighter) => {
-    fighter.initiative += fighter.currentSpeed();
-  });
-  nextTurn(allFighters);
-}
-
 function nextTurn() {
-  readyFighters = allFighters.filter((fighter) => fighter.initiative >= 100);
+  readyFighters = activeFighters.filter((fighter) => fighter.initiative >= 100);
 
   if (readyFighters.length === 0) {
-    tick(allFighters);
+    tick();
   } else {
     currentFighter = determineFighter(readyFighters);
     currentFighter.initiative = 0;
     startOfTurn(currentFighter);
-    console.log(currentFighter.name + " is up next");
   }
 }
 
@@ -1354,81 +1181,224 @@ function determineFighter() {
   return readyFighters[0];
 }
 
-function targetHit(target) {
-  let targetHitOverlay = document.querySelector(`#${target.name} .hit-overlay`);
-  targetHitOverlay.style.display = "block";
-  setTimeout(() => {
-    targetHitOverlay.style.display = "none";
-  }, 500);
-  if (target.currentHitPoints <= 0) {
-    target.currentHitPoints = 0;
-    console.log("words");
-    console.log({ currentHitPoints: target.currentHitPoints });
-    let targetDeadOverlay = document.querySelector(
-      `#${target.name} .dead-overlay`
-    );
-    targetDeadOverlay.style.display = "block";
-    refreshUI();
+function attackTarget(fighter, target, damage, blocking) {
+  if (fighter.type === "Water" && target.type === "Fire") {
+    damage = damage * 1.1;
+  }
+  if (fighter.type === "Fire" && target.type === "Earth") {
+    damage = damage * 1.1;
+  }
 
-    let index = allFighters.indexOf(target);
-    if (index > -1) {
-      allFighters.splice(index, 1);
+  if (fighter.type === "Earth" && target.type === "Water") {
+    damage = damage * 1.1;
+  }
+
+  if (fighter.type === "Water" && target.type === "Earth") {
+    damage = damage * 0.9;
+  }
+
+  if (fighter.type === "Fire" && target.type === "Water") {
+    damage = damage * 0.9;
+  }
+
+  if (fighter.type === "Earth" && target.type === "Fire") {
+    damage = damage * 0.9;
+  }
+
+  let attackRating = Math.floor(fighter.currentAttack() * damage);
+  let defenseRating = Math.floor(target.currentDefense() * blocking);
+  let damageDealt;
+
+  if (attackRating > defenseRating) {
+    damageDealt = attackRating - defenseRating;
+  } else {
+    damageDealt = 5;
+  }
+  target.currentHitPoints = target.currentHitPoints - damageDealt;
+  updateLog(
+    `${fighter.name} hit ${target.name} for ${damageDealt} damage`,
+    "red"
+  );
+  targetHit(target);
+
+  if (target.currentHitPoints > 0) {
+    if (target.defensiveSkill.active && target.defensiveSkill.skill) {
+      target.defensiveSkill.skill(fighter);
     }
   }
-  refreshUI();
 }
 
-function targetBuffed(target) {
-  let targetHealOverlay = document.querySelector(
-    `#${target.name} .heal-overlay`
-  );
-  setTimeout(() => {
-    targetHealOverlay.style.display = "block";
-  }, 200);
-  setTimeout(() => {
-    targetHealOverlay.style.display = "none";
-  }, 1000);
+function attackTeam(fighter, target, damage, blocking) {
+  [...activeFighters].forEach((defender) => {
+    if (defender.team === target.team) {
+      if (fighter.type === "Water" && defender.type === "Fire") {
+        damage = damage * 1.1;
+      }
+      if (fighter.type === "Fire" && defender.type === "Earth") {
+        damage = damage * 1.1;
+      }
+      if (fighter.type === "Earth" && defender.type === "Water") {
+        damage = damage * 1.1;
+      }
 
-  refreshUI();
+      if (fighter.type === "Water" && defender.type === "Earth") {
+        damage = damage * 0.9;
+      }
+      if (fighter.type === "Fire" && defender.type === "Water") {
+        damage = damage * 0.9;
+      }
+      if (fighter.type === "Earth" && defender.type === "Fire") {
+        damage = damage * 0.9;
+      }
+
+      let attackRating = Math.floor(fighter.currentAttack() * damage);
+      let defenseRating = Math.floor(defender.currentDefense() * blocking);
+      let damageDealt;
+      if (attackRating > defenseRating) {
+        damageDealt = attackRating - defenseRating;
+      } else {
+        damageDealt = 5;
+      }
+      defender.currentHitPoints = defender.currentHitPoints - damageDealt;
+
+      updateLog(
+        `${fighter.name} hit ${defender.name} for ${damageDealt} damage`,
+        "red"
+      );
+      targetHit(defender);
+
+      if (defender.currentHitPoints > 0) {
+        if (defender.defensiveSkill.active && defender.defensiveSkill.skill) {
+          defender.defensiveSkill.skill(fighter);
+        }
+      }
+    }
+  });
 }
 
-function updateLog(message, color) {
-  let log = document.getElementById("log");
-  let newMessage = document.createElement("p");
-  newMessage.textContent = message;
-  newMessage.style.color = color;
-  log.appendChild(newMessage);
-  log.scrollTop = log.scrollHeight;
+function healTarget(fighter, target, healRating) {
+  let healAmount = Math.floor(target.classHitPoints * healRating);
+  target.currentHitPoints = target.currentHitPoints + healAmount;
+  if (target.currentHitPoints > target.classHitPoints) {
+    target.currentHitPoints = target.classHitPoints;
+  }
+  targetBuffed(target);
+  if (target === fighter) {
+    updateLog(`${fighter.name} healed themself for ${healAmount}`, "green");
+  } else {
+    updateLog(
+      `${fighter.name} healed ${target.name} for ${healAmount}`,
+      "green"
+    );
+  }
 }
+
+function healTeam(fighter, target, healRating) {
+  let healAmount = Math.floor(target.classHitPoints * healRating);
+  activeFighters.forEach((healTarget) => {
+    if (healTarget.team === target.team) {
+      healTarget.currentHitPoints = healTarget.currentHitPoints + healAmount;
+      if (healTarget.currentHitPoints > healTarget.classHitPoints) {
+        healTarget.currentHitPoints = healTarget.classHitPoints;
+      }
+      targetBuffed(healTarget);
+      if (healTarget === fighter) {
+        updateLog(`${fighter.name} healed themself for ${healAmount}`, "green");
+      } else {
+        updateLog(
+          `${fighter.name} healed ${healTarget.name} for ${healAmount}`,
+          "green"
+        );
+      }
+    }
+  });
+}
+
+function preAttackSpecial(fighter) {
+  if (fighter.preAttackSpecial.active && fighter.preAttackSpecial.skill) {
+    fighter.preAttackSpecial.skill();
+    fighter.preAttackSpecial.count = fighter.preAttackSpecial.cooldown;
+  }
+}
+
+function postAttackSpecial(fighter) {
+  if (fighter.postAttackSpecial.active && fighter.postAttackSpecial.skill) {
+    fighter.postAttackSkill.skill();
+    fighter.postAttackSpecial.count = fighter.postAttackSpecial.cooldown;
+  }
+}
+
+function endOfTurnSpecialSkill(fighter) {
+  if (fighter.endOfTurnSpecial.active && fighter.endOfTurnSpecial.skill) {
+    fighter.endOfTurnSpecial.skill();
+    fighter.endOfTurnSpecial.count = fighter.endOfTurnSpecial.cooldown;
+  }
+}
+
+function startOfTurnSpecialSkill(fighter) {
+  if (fighter.startOfTurnSpecial.active && fighter.startOfTurnSpecial.skill) {
+    fighter.startOfTurnSpecial.skill();
+    fighter.startOfTurnSpecial.count = fighter.startOfTurnSpecial.cooldown;
+  }
+}
+refreshCount = 1;
 
 function refreshUI() {
+  console.log("refreshing UI" + refreshCount);
+  refreshCount++;
   allFighters.forEach((fighter) => {
-    let fighterHitpoints = document.getElementById(`${fighter.name}-hitpoints`);
-    fighterHitpoints.textContent = `Hitpoints: ${fighter.currentHitPoints}`;
+    let fighterHitpoints = document.querySelector(
+      `#${fighter.name} .hitpoints`
+    );
+    fighterHitpoints.textContent = `${fighter.currentHitPoints} / ${fighter.classHitPoints}`;
 
-    let fighterAttack = document.getElementById(`${fighter.name}-attack`);
+    const currentHitPoints = fighter.currentHitPoints;
+    const classHitPoints = fighter.classHitPoints;
+    const healthPercentage = (currentHitPoints / classHitPoints) * 100;
+
+    let healthBar = document.querySelector(
+      `#${fighter.name} .hitpoints-progress`
+    );
+    healthBar.style.width = `${healthPercentage}%`;
+    let fighterAttack = document.querySelector(`#${fighter.name} .attack`);
     let fighterAttackBuff = document.querySelector(
       `#${fighter.name} .attack-buff`
     );
+
     let fighterAttackDebuff = document.querySelector(
       `#${fighter.name} .attack-debuff`
     );
-    fighterAttackBuff.style.display = fighter.attackBuff ? "block" : "none";
-    fighterAttackDebuff.style.display = fighter.attackDebuff ? "block" : "none";
+    fighterAttackBuff.style.display = fighter.attackBuff.active
+      ? "block"
+      : "none";
+    fighterAttackDebuff.style.display = fighter.attackDebuff.active
+      ? "block"
+      : "none";
     fighterAttack.textContent = `Attack: ${fighter.currentAttack()}`;
 
-    let fighterDefense = document.getElementById(`${fighter.name}-defense`);
+    let fighterDefense = document.querySelector(`#${fighter.name} .defense`);
     let fighterDefenseBuff = document.querySelector(
       `#${fighter.name} .defense-buff`
     );
     let fighterDefenseDebuff = document.querySelector(
       `#${fighter.name} .defense-debuff`
     );
-    fighterDefenseBuff.style.display = fighter.defenseBuff ? "block" : "none";
-    fighterDefenseDebuff.style.display = fighter.defenseDebuff
+    fighterDefenseBuff.style.display = fighter.defenseBuff.active
+      ? "block"
+      : "none";
+    fighterDefenseDebuff.style.display = fighter.defenseDebuff.active
       ? "block"
       : "none";
     fighterDefense.textContent = `Defense: ${fighter.currentDefense()}`;
+
+    let turnBar = document.querySelector(
+      `#${fighter.name} .initiative-progress`
+    );
+    if (fighter.initiative < 100) {
+      turnBar.style.width = `${fighter.initiative}%`;
+    } else {
+      turnBar.style.width = `100`;
+    }
 
     let fighterSpeedBuff = document.querySelector(
       `#${fighter.name} .speed-buff`
@@ -1436,18 +1406,25 @@ function refreshUI() {
     let fighterSpeedDebuff = document.querySelector(
       `#${fighter.name} .speed-debuff`
     );
-    fighterSpeedBuff.style.display = fighter.speedBuff ? "block" : "none";
-    fighterSpeedDebuff.style.display = fighter.speedDebuff ? "block" : "none";
-
-    let fighterFireDebuff = document.querySelector(
+    fighterSpeedBuff.style.display = fighter.speedBuff.active
+      ? "block"
+      : "none";
+    fighterSpeedDebuff.style.display = fighter.speedDebuff.active
+      ? "block"
+      : "none";
+    let fighterBurnDebuff = document.querySelector(
       `#${fighter.name} .burn-debuff`
     );
-    fighterFireDebuff.style.display = fighter.burnDebuff ? "block" : "none";
+    fighterBurnDebuff.style.display = fighter.burnDebuff.active
+      ? "block"
+      : "none";
 
     let fighterStunDebuff = document.querySelector(
       `#${fighter.name} .stun-debuff`
     );
-    fighterStunDebuff.style.display = fighter.stunDebuff ? "block" : "none";
+    fighterStunDebuff.style.display = fighter.stunDebuff.active
+      ? "block"
+      : "none";
 
     let fighterHealthyImage = document.querySelector(
       `#${fighter.name} .healthy`
@@ -1468,74 +1445,438 @@ function refreshUI() {
         : "none";
     fighterDeadImage.style.display =
       fighter.currentHitPoints <= 0 ? "block" : "none";
+
     allFighters.forEach((fighter) => {
       const fighterDiv = document.getElementById(fighter.name);
-      fighterDiv.style.opacity = "1";
+      fighterDiv.style.opacity = ".5";
     });
   });
 }
 
-nextTurn();
-refreshUI();
+function updateLog(message, color) {
+  let log = document.getElementById("log");
+  let newMessage = document.createElement("p");
+  newMessage.textContent = message;
+  newMessage.style.color = color;
+  log.appendChild(newMessage);
+  log.scrollTop = log.scrollHeight;
+}
 
-function preAttackSpecial(fighter, target) {
-  if (fighter.special) {
-    fighter.postAttackSkill(fighter, target);
+function targetBuffed(target) {
+  let targetHealOverlay = document.querySelector(
+    `#${target.name} .heal-overlay`
+  );
+  setTimeout(() => {
+    targetHealOverlay.style.display = "block";
+  }, 200);
+  setTimeout(() => {
+    targetHealOverlay.style.display = "none";
+  }, 1000);
+
+  refreshUI();
+}
+
+function targetHealed(target) {
+  let targetHealOverlay = document.querySelector(
+    `#${target.name} .heal-overlay`
+  );
+  setTimeout(() => {
+    targetHealOverlay.style.display = "block";
+  }, 200);
+  setTimeout(() => {
+    targetHealOverlay.style.display = "none";
+  }, 1000);
+
+  refreshUI();
+}
+
+function targetHit(target) {
+  let targetHitOverlay = document.querySelector(`#${target.name} .hit-overlay`);
+  setTimeout(() => {
+    targetHitOverlay.style.display = "block";
+  }, 200);
+  setTimeout(() => {
+    targetHitOverlay.style.display = "none";
+  }, 1000);
+
+  if (target.currentHitPoints <= 0) {
+    targetKilled(target);
+  }
+
+  refreshUI();
+}
+
+function targetKilled(target) {
+  target.currentHitPoints = 0;
+  let targetDeadOverlay = document.querySelector(
+    `#${target.name} .dead-overlay`
+  );
+  targetDeadOverlay.style.display = "block";
+  refreshUI();
+
+  let index = activeFighters.indexOf(target);
+  if (index > -1) {
+    activeFighters.splice(index, 1);
+  }
+  inactiveFighters.push(target);
+  updateLog(`${target.name} has been defeated!`, "red");
+}
+
+function targetDebuffed(target) {
+  let targetHitOverlay = document.querySelector(`#${target.name} .hit-overlay`);
+  setTimeout(() => {
+    targetHitOverlay.style.display = "block";
+  }, 200);
+  setTimeout(() => {
+    targetHitOverlay.style.display = "none";
+  }, 1000);
+  refreshUI();
+}
+
+function buffTarget(fighter, target, buff, duration, chance) {
+  const random = Math.random();
+  if (random <= chance) {
+    buff.active = true;
+    buff.count = duration;
+    updateLog(
+      `${fighter.name} increased ${target.name}'s ${buff.skill}`,
+      "white"
+    );
+    targetBuffed(target);
   }
 }
 
-function postAttackSpecial(fighter, target) {
-  if (fighter.postAttackSpecial) {
-    fighter.postAttackSkill(fighter, target);
-  }
-  endOfTurn(fighter);
-}
-
-function attackBuff(target, duration) {
-  target.attackBuff = true;
-  target.attackBuffCount = duration;
-}
-
-function defenseBuff(target, duration) {
-  allFighters.forEach((fighter) => {
-    if (fighter.team === target.team) {
-      if (fighter === this) {
-        target.defenseBuff = true;
-        target.defenseBuffCount = duration + 1;
-      } else {
-        target.defenseBuff = true;
-        target.defenseBuffCount = duration;
+function buffTeam(fighter, target, buff, duration, chance) {
+  activeFighters.forEach((teammate) => {
+    if (teammate.team === target.team) {
+      const random = Math.random();
+      if (random <= chance) {
+        if (buff.skill === "Speed") {
+          teammate.speedBuff.active = true;
+          teammate.speedBuff.count = duration;
+          updateLog(
+            `${fighter.name} increased ${teammate.name}'s ${buff.skill}`,
+            "white"
+          );
+        } else if (buff.skill === "Attack") {
+          teammate.attackBuff.active = true;
+          teammate.attackBuff.count = duration;
+          updateLog(
+            `${fighter.name} increased ${teammate.name}'s ${buff.skill}`,
+            "white"
+          );
+        } else if (buff.skill === "Defense") {
+          teammate.defenseBuff.active = true;
+          teammate.defenseBuff.count = duration;
+          updateLog(
+            `${fighter.name} increased ${teammate.name}'s ${buff.skill}`,
+            "white"
+          );
+        }
+        targetBuffed(teammate);
       }
     }
   });
 }
 
-function speedBuff(target, duration) {
-  target.speedBuff = true;
-  target.speedBuffCount = duration;
+function debuffTarget(fighter, target, debuff, duration, chance) {
+  const random = Math.random();
+  if (random <= chance) {
+    debuff.active = true;
+    debuff.count = duration;
+    if (debuff.skill === "Stun") {
+      updateLog(`${fighter.name} stunned ${target.name}`, "white");
+    } else if (debuff.skill === "Burn") {
+      updateLog(`${fighter.name} burned ${target.name}`, "white");
+    } else {
+      updateLog(
+        `${fighter.name} lowered ${target.name}'s ${debuff.skill}`,
+        "white"
+      );
+    }
+    targetDebuffed(target);
+  }
 }
 
-function defenseDebuff(target, duration) {
-  target.defenseDebuff = true;
-  target.defenseDebuffCount = duration;
+function debuffTeam(fighter, target, debuff, duration, chance) {
+  activeFighters.forEach((defender) => {
+    const random = Math.random();
+    if (random <= chance) {
+      if (defender.team === target.team) {
+        if (debuff.skill === "Stun") {
+          defender.stunDebuff.active = true;
+          defender.stunDebuff.count = duration;
+          updateLog(`${fighter.name} stunned ${defender.name}`, "white");
+        } else if (debuff.skill === "Burn") {
+          defender.burnDebuff.active = true;
+          defender.burnDebuff.count = duration;
+          updateLog(`${fighter.name} burned ${defender.name}`, "white");
+        } else if (debuff.skill === "Speed") {
+          defender.speedDebuff.active = true;
+          defender.speedDebuff.count = duration;
+          updateLog(
+            `${fighter.name} lowered ${defender.name}'s ${debuff.skill}`,
+            "white"
+          );
+        } else if (debuff.skill === "Attack") {
+          defender.attackDebuff.active = true;
+          defender.attackDebuff.count = duration;
+          updateLog(
+            `${fighter.name} lowered ${defender.name}'s ${debuff.skill}`,
+            "white"
+          );
+        } else if (debuff.skill === "Defense") {
+          defender.defenseDebuff.active = true;
+          defender.defenseDebuff.count = duration;
+          updateLog(
+            `${fighter.name} lowered ${defender.name}'s ${debuff.skill}`,
+            "white"
+          );
+        }
+        targetDebuffed(defender);
+      }
+    }
+  });
 }
 
-function attackDebuff(target, duration) {
-  target.attackDebuff = true;
-  target.attackDebuffCount = duration;
+function cleanseTarget(target) {
+  target.attackDebuff = { active: false, count: 0, skill: "Attack" };
+  target.defenseDebuff = { active: false, count: 0, skill: "Defense" };
+  target.speedDebuff = { active: false, count: 0, skill: "Speed" };
+  target.stunDebuff = { active: false, count: 0, skill: "Stun" };
+  target.burnDebuff = { active: false, count: 0, skill: "Burn" };
+  updateLog(`${target.name} has been cleansed`, "white");
+  targetBuffed(target);
 }
 
-function speedDebuff(target, duration) {
-  target.speedDebuff = true;
-  target.speedDebuffCount = duration;
+function cleanseTeam(target) {
+  activeFighters.forEach((fighter) => {
+    if (fighter.team === target.team) {
+      fighter.attackDebuff = { active: false, count: 0, skill: "Attack" };
+      fighter.defenseDebuff = { active: false, count: 0, skill: "Defense" };
+      fighter.speedDebuff = { active: false, count: 0, skill: "Speed" };
+      fighter.stunDebuff = { active: false, count: 0, skill: "Stun" };
+      fighter.burnDebuff = { active: false, count: 0, skill: "Burn" };
+      updateLog(`${target.name} has been cleansed`, "white");
+      targetBuffed(fighter);
+    }
+  });
 }
 
-function stunDebuff(target, duration) {
-  target.stunDebuff = true;
-  target.stunDebuffCount = duration;
+function refreshTarget(target) {
+  const skills = [
+    "innateSpecial",
+    "startOfTurnSpecial",
+    "preAttackSpecial",
+    "firstSkill",
+    "secondSkill",
+    "thirdSkill",
+    "firstSpecialSkill",
+    "secondSpecialSkill",
+    "postAttackSpecial",
+    "endOfTurnSpecial",
+  ];
+
+  skills.forEach((skill) => {
+    target[skill].count = 0;
+
+    let skillCooldown = document.querySelector(`#${target.name} .${skill}-cd`);
+    {
+      if (skillCooldown) {
+        skillCooldown.style.display = "none";
+
+        let skillCooldownText = document.querySelector(
+          `#${target.name} .${skill}-cd-text`
+        );
+        skillCooldownText.textContent = target[skill].count;
+      }
+    }
+  });
+  targetBuffed(target);
 }
 
-function burnDebuff(target, duration) {
-  target.burnDebuff = true;
-  target.burnDebuffCount = duration;
+function refreshTeam(target) {
+  activeFighters.forEach((fighter) => {
+    if (fighter.team === target.team) {
+      const skills = [
+        "innateSpecial",
+        "startOfTurnSpecial",
+        "preAttackSpecial",
+        "firstSkill",
+        "secondSkill",
+        "thirdSkill",
+        "firstSpecialSkill",
+        "secondSpecialSkill",
+        "postAttackSpecial",
+        "endOfTurnSpecial",
+      ];
+
+      skills.forEach((skill) => {
+        fighter[skill].count = 0;
+
+        let skillCooldown = document.querySelector(
+          `#${fighter.name} .${skill}-cd`
+        );
+        {
+          if (skillCooldown) {
+            skillCooldown.style.display = "none";
+
+            let skillCooldownText = document.querySelector(
+              `#${fighter.name} .${skill}-cd-text`
+            );
+            skillCooldownText.textContent = fighter[skill].count;
+          }
+        }
+      });
+      targetBuffed(fighter);
+    }
+  });
+}
+
+function stripTarget(target) {
+  target.attackBuff = { active: false, count: 0, skill: "Attack" };
+  target.defenseBuff = { active: false, count: 0, skill: "Defense" };
+  target.speedBuff = { active: false, count: 0, skill: "Speed" };
+  targetDebuffed(target);
+}
+
+function stripTeam(target) {
+  activeFighters.forEach((fighter) => {
+    if (fighter.team === target.team) {
+      fighter.attackBuff = { active: false, count: 0, skill: "Attack" };
+      fighter.defenseBuff = { active: false, count: 0, skill: "Defense" };
+      fighter.speedBuff = { active: false, count: 0, skill: "Speed" };
+      targetDebuffed(fighter);
+    }
+  });
+}
+
+function increaseCooldowns(fighter, target) {
+  const skills = [
+    "innateSpecial",
+    "startOfTurnSpecial",
+    "preAttackSpecial",
+    "secondSkill",
+    "thirdSkill",
+    "firstSpecialSkill",
+    "secondSpecialSkill",
+    "postAttackSpecial",
+    "endOfTurnSpecial",
+  ];
+
+  skills.forEach((skill) => {
+    target[skill].count++;
+    let skillCooldown = document.querySelector(`#${target.name} .${skill}-cd`);
+    {
+      if (skillCooldown) {
+        skillCooldown.style.display = "block";
+
+        let skillCooldownText = document.querySelector(
+          `#${target.name} .${skill}-cd-text`
+        );
+        skillCooldownText.textContent = target[skill].count;
+      }
+    }
+  });
+  updateLog(`${fighter.name} increased ${target.name}'s skill cooldowns`);
+  targetDebuffed(target);
+}
+
+function endOfTurn(fighter) {
+  let targetActiveBorder = document.getElementById(fighter.name);
+  targetActiveBorder.style.borderColor = "black";
+  buffCountTracker(fighter);
+  debuffCountTracker(fighter);
+  skillCooldownTracker(fighter);
+  endOfTurnSpecialSkill(fighter);
+  deactivateSkillButtons(fighter);
+  tick();
+}
+
+function startOfTurn(fighter) {
+  startOfTurnSpecialSkill(fighter);
+  let fighterActiveBorder = document.getElementById(fighter.name);
+  fighterActiveBorder.style.borderColor = "white";
+  activateSkillButtons(fighter);
+  startOfTurnDebuffs(fighter);
+}
+
+function startOfTurnDebuffs(fighter) {
+  if (fighter.burnDebuff.active) {
+    updateLog(`${fighter.name} is burning and taking damage`, "white");
+    fighter.currentHitPoints =
+      fighter.currentHitPoints - Math.floor(fighter.classHitPoints * 0.1);
+    fighter.burnDebuff.count--;
+    if (fighter.burnDebuff === 0) {
+      fighter.burnDebuff.active = false;
+    }
+  }
+
+  let fighterOpacity = document.getElementById(fighter.name);
+  fighterOpacity.style.opacity = "1";
+
+  if (fighter.stunDebuff.active) {
+    updateLog(`${fighter.name} is stunned and cannot move`, "white");
+    endOfTurn(fighter);
+  }
+}
+
+function deactivateSkillButtons(fighter) {
+  fighter.firstSkillButton.removeEventListener(
+    "click",
+    fighter.firstSkillButton.clickHandler
+  );
+  fighter.secondSkillButton.removeEventListener(
+    "click",
+    fighter.secondSkillButton.clickHandler
+  );
+  fighter.thirdSkillButton.removeEventListener(
+    "click",
+    fighter.thirdSkillButton.clickHandler
+  );
+  fighter.firstSpecialSkillButton.removeEventListener(
+    "click",
+    fighter.firstSpecialSkillButton.clickHandler
+  );
+  fighter.secondSpecialSkillButton.removeEventListener(
+    "click",
+    fighter.secondSpecialSkillButton.clickHandler
+  );
+  refreshUI();
+}
+
+function activateSkillButtons(fighter) {
+  fighter.firstSkillButton.addEventListener(
+    "click",
+    fighter.firstSkillButton.clickHandler
+  );
+  fighter.secondSkillButton.addEventListener(
+    "click",
+    fighter.secondSkillButton.clickHandler
+  );
+  fighter.thirdSkillButton.addEventListener(
+    "click",
+    fighter.thirdSkillButton.clickHandler
+  );
+  fighter.firstSpecialSkillButton.addEventListener(
+    "click",
+    fighter.firstSpecialSkillButton.clickHandler
+  );
+  fighter.secondSpecialSkillButton.addEventListener(
+    "click",
+    fighter.secondSpecialSkillButton.clickHandler
+  );
+  refreshUI();
+}
+
+function boostTarget(target, amount) {
+  target.initiative = target.initiative + amount;
+}
+
+function boostTeam(target, amount) {
+  activeFighters.forEach((fighter) => {
+    if (fighter.team === target.team) {
+      fighter.initiative = fighter.initiative + amount;
+    }
+  });
 }
