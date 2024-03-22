@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samson's Battle Royale</title>
+    <link rel="stylesheet" type="text/css" href="./battle-royale.css" />
+  </head>
+  <body>
+    <div id="heading-box">
+      <h1>Samson's Battle Royale</h1>
+    </div>
+    <div id="top-battle-box">
+      <div class="fighter-box" id="calvin">
+        <div class="buff-box">
+          <div class="buffs">
+            <img
+              class="attack-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737326130630706/atkup.png?ex=66051d43&is=65f2a843&hm=d2439ddb8d1bd9fe151a150e4fb7c1d3aa3940987a17611d9c87225453f6b59a&"
+              alt="Attack Buff"
+            />
+            <img
+              class="defense-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217736513635487804/defup.png?ex=66051c81&is=65f2a781&hm=0712257ef5136f35dabdb986c089b3c4835f3760ade69678ea3852ee6e2b84ab&"
+              alt="Defense Buff"
+            />
+            <img
+              class="speed-buff"
+              src="https://media.discordapp.net/attachments/1097230681530192017/1217736262052745266/spdup.png?ex=66051c45&is=65f2a745&hm=56a61e8f506ef877ca04d2b9b895874afd91a499e4f9cbf3dde578ddc169bcb0&=&format=webp&quality=lossless&width=680&height=680"
+              alt="Speed Buff"
+            />
+            <img
+              class="heal-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737325602279434/heal.png?ex=66051d42&is=65f2a842&hm=1706f7ea5d27848890682d56c33ff7a7bdba75a9f5786c58b9c220b0f2185dd5&"
+              alt="Heal Buff"
+            />
+            <img
+              class="random-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737324994232401/random.png?ex=66051d42&is=65f2a842&hm=5e654ea0c908c6a5103e2bd7dbb22d58277205c8a53059e002557aeed21486df&"
+              alt="Random Buff"
+            />
+          </div>
+          <div class="debuffs">
+            <img
+              class="burn-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440448507994/fireDebuff.png?ex=660517c7&is=65f2a2c7&hm=a3040b1316b85e0d7ee7d0017bf9cad1f0e7154e6cd002c02382d43f742f453f&"
+              alt="Burn Debuff"
+            />
+            <img
+              class="stun-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731441157214279/stundebuff.png?ex=660517c7&is=65f2a2c7&hm=4aa020c40f1e727c1b22b2ef5969f71dde467ffaf75d2bf662ed3112602a42b8&"
+              alt="Stun Debuff"
+            />
+            <img
+              class="attack-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731438842089482/atkdn.png?ex=660517c7&is=65f2a2c7&hm=49f265045277bc9a70ed604c344ca184ccafed3c004c67604c48a4448d347f8d&"
+              alt="Attack Debuff"
+            />
+            <img
+              class="defense-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731439253000252/defdn.png?ex=660517c7&is=65f2a2c7&hm=42279dbf34b27ebc80100047ed83bd8bbf92e864cb8e221e632b6a27f0ddbd71&"
+              alt="Defense Debuff"
+            />
+            <img
+              class="speed-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440867803206/spddn.png?ex=660517c7&is=65f2a2c7&hm=5c9a8f74d4ca18f7d1aa93a1804a14f2e0ed018fc660fbe6c643b6f6adf4a3ef&"
+              alt="Speed Debuff"
+            />
+          </div>
+        </div>
+        <div class="image-box">
+          <div class="skill-box">
+            <div class="firstSkill-box">
+              <button class="firstSkill-btn">
+                <img
+                  class="firstSkill"
+                  src="https://cdn.midjourney.com/e02b6080-8ac8-4eb0-b4e7-8048105562dc/0_0.webp"
+                  alt="Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSkill-cd">
+                <span class="firstSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSkill-box">
+              <button class="secondSkill-btn">
+                <img
+                  class="secondSkill"
+                  src="https://cdn.midjourney.com/2ad1c91a-0167-43c0-9b45-c101679f0b1e/0_3.webp"
+                  alt="Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSkill-cd">
+                <span class="secondSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="thirdSkill-box">
+              <button class="thirdSkill-btn">
+                <img
+                  class="thirdSkill"
+                  src="https://cdn.midjourney.com/d34e7f83-ac8b-4208-b733-acbb385bb3e3/0_1.webp"
+                  alt="Skill 3 Icon"
+                />
+              </button>
+              <div class="thirdSkill-cd">
+                <span class="thirdSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+          <div class="fighter">
+            <img
+              class="healthy earth"
+              id="ewh"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405810003673088/earth-warrior-ready.png?ex=6603e883&is=65f17383&hm=8b17ecc59a544060717397cc64b0db8120e7d010c4eaccce35046ae788b57038&"
+              alt="Healthy Earth Warrior"
+            />
+            <img
+              class="injured earth"
+              id="ewi"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405809500225546/earth-warrior-injured.png?ex=6603e883&is=65f17383&hm=a75984814f19b0e2d10e061e3c69b71aaaa9d4ea2328529d6a84dfa561a99861&"
+              alt="Injured Earth Warrior"
+            />
+            <img
+              class="dead earth"
+              id="ewd"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405809089318952/earth-warrior-dead.png?ex=6603e883&is=65f17383&hm=f156bf2ad25dca538c5a72ba90e77703436bd88629b17f2a5fe7cc7e267233b1&"
+              alt="Dead Earth Warrior"
+            />
+            <div class="hit-overlay"></div>
+            <div class="heal-overlay"></div>
+            <div class="dead-overlay"></div>
+          </div>
+          <div class="special-skill-box">
+            <div class="firstSpecialSkill-box">
+              <button class="firstSpecialSkill-btn">
+                <img
+                  class="firstSpecialSkill"
+                  src="https://cdn.midjourney.com/2964f192-c9fe-415a-be28-a99515771425/0_3.webp"
+                  alt="Class Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSpecialSkill-cd">
+                <span class="firstSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSpecialSkill-box">
+              <button class="secondSpecialSkill-btn">
+                <img
+                  class="secondSpecialSkill"
+                  src="https://cdn.midjourney.com/5215f622-54fd-41f6-b6d2-dcaf32f13778/0_0.webp"
+                  alt="Class Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSpecialSkill-cd">
+                <span class="secondSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="initiative-container">
+            <div class="initiative-bar">
+              <div class="initiative-progress"></div>
+            </div>
+          </div>
+          <div class="battle-stats">
+            <p class="attack">Attack:</p>
+            <p class="defense">Defense:</p>
+          </div>
+          <div class="hitpoints-container">
+            <p class="hitpoints">/</p>
+            <div class="hitpoints-bar">
+              <div class="hitpoints-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fighter-box" id="felix">
+        <div class="buff-box">
+          <div class="buffs">
+            <img
+              class="attack-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737326130630706/atkup.png?ex=66051d43&is=65f2a843&hm=d2439ddb8d1bd9fe151a150e4fb7c1d3aa3940987a17611d9c87225453f6b59a&"
+              alt="Attack Buff"
+            />
+            <img
+              class="defense-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217736513635487804/defup.png?ex=66051c81&is=65f2a781&hm=0712257ef5136f35dabdb986c089b3c4835f3760ade69678ea3852ee6e2b84ab&"
+              alt="Defense Buff"
+            />
+            <img
+              class="speed-buff"
+              src="https://media.discordapp.net/attachments/1097230681530192017/1217736262052745266/spdup.png?ex=66051c45&is=65f2a745&hm=56a61e8f506ef877ca04d2b9b895874afd91a499e4f9cbf3dde578ddc169bcb0&=&format=webp&quality=lossless&width=680&height=680"
+              alt="Speed Buff"
+            />
+            <img
+              class="heal-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737325602279434/heal.png?ex=66051d42&is=65f2a842&hm=1706f7ea5d27848890682d56c33ff7a7bdba75a9f5786c58b9c220b0f2185dd5&"
+              alt="Heal Buff"
+            />
+            <img
+              class="random-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737324994232401/random.png?ex=66051d42&is=65f2a842&hm=5e654ea0c908c6a5103e2bd7dbb22d58277205c8a53059e002557aeed21486df&"
+              alt="Random Buff"
+            />
+          </div>
+          <div class="debuffs">
+            <img
+              class="burn-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440448507994/fireDebuff.png?ex=660517c7&is=65f2a2c7&hm=a3040b1316b85e0d7ee7d0017bf9cad1f0e7154e6cd002c02382d43f742f453f&"
+              alt="Burn Debuff"
+            />
+            <img
+              class="stun-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731441157214279/stundebuff.png?ex=660517c7&is=65f2a2c7&hm=4aa020c40f1e727c1b22b2ef5969f71dde467ffaf75d2bf662ed3112602a42b8&"
+              alt="Stun Debuff"
+            />
+            <img
+              class="attack-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731438842089482/atkdn.png?ex=660517c7&is=65f2a2c7&hm=49f265045277bc9a70ed604c344ca184ccafed3c004c67604c48a4448d347f8d&"
+              alt="Attack Debuff"
+            />
+            <img
+              class="defense-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731439253000252/defdn.png?ex=660517c7&is=65f2a2c7&hm=42279dbf34b27ebc80100047ed83bd8bbf92e864cb8e221e632b6a27f0ddbd71&"
+              alt="Defense Debuff"
+            />
+            <img
+              class="speed-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440867803206/spddn.png?ex=660517c7&is=65f2a2c7&hm=5c9a8f74d4ca18f7d1aa93a1804a14f2e0ed018fc660fbe6c643b6f6adf4a3ef&"
+              alt="Speed Debuff"
+            />
+          </div>
+        </div>
+        <div class="image-box">
+          <div class="skill-box">
+            <div class="firstSkill-box">
+              <button class="firstSkill-btn">
+                <img
+                  class="firstSkill"
+                  src="https://cdn.midjourney.com/797b01fe-ee55-45d2-a1bd-12635809b2e0/0_1.webp"
+                  alt="Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSkill-cd">
+                <span class="firstSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSkill-box">
+              <button class="secondSkill-btn">
+                <img
+                  class="secondSkill"
+                  src="https://cdn.midjourney.com/4a513281-da0e-42e9-8a56-7f0329b625e5/0_0.webp"
+                  alt="Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSkill-cd">
+                <span class="secondSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="thirdSkill-box">
+              <button class="thirdSkill-btn">
+                <img
+                  class="thirdSkill"
+                  src="https://cdn.midjourney.com/cc1f2a84-aa9b-4ec8-b2d0-16b858ccb8c0/0_1_384_N.webp?method=shortest&qst=6&quality=15"
+                  alt="Skill 3 Icon"
+                />
+              </button>
+              <div class="thirdSkill-cd">
+                <span class="thirdSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+          <div class="fighter">
+            <img
+              class="healthy water"
+              id="wsh"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217406060319604776/water-scholar-ready.png?ex=6603e8bf&is=65f173bf&hm=daac414ca412cf9866695057535233a6c617e9cae5a768ad4d345e0b089888cb&"
+              alt="Healthy Water Scholar"
+            />
+            <img
+              class="injured water"
+              id="wsi"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217406059598315541/water-scholar-injured.png?ex=6603e8be&is=65f173be&hm=f10e56f8fdf16d446089ebc895b3cd996792385fac3ca3612f7bee13d49fdf30&"
+              alt="Injured Water Scholar"
+            />
+            <img
+              class="dead water"
+              id="wsd"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217406059099066469/water-scholar-dead.png?ex=6603e8be&is=65f173be&hm=e43db2cd388fc09e46b865f28a8d720d420c27ebcb8ae6d3abf287c1ab3ab3e1&"
+              alt="Dead Water Scholar"
+            />
+            <div class="hit-overlay"></div>
+            <div class="heal-overlay"></div>
+            <div class="dead-overlay"></div>
+          </div>
+          <div class="special-skill-box">
+            <div class="firstSpecialSkill-box">
+              <button class="firstSpecialSkill-btn">
+                <img
+                  class="firstSpecialSkill"
+                  src="https://cdn.midjourney.com/007c35ef-3d76-4837-b66a-b951a127913b/0_1.webp"
+                  alt="Class Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSpecialSkill-cd">
+                <span class="firstSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSpecialSkill-box">
+              <button class="secondSpecialSkill-btn">
+                <img
+                  class="secondSpecialSkill"
+                  src="https://cdn.midjourney.com/87f998fc-76a9-4c38-8799-a08c43cfb3da/0_1.webp"
+                  alt="Class Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSpecialSkill-cd">
+                <span class="secondSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="initiative-container">
+            <div class="initiative-bar">
+              <div class="initiative-progress"></div>
+            </div>
+          </div>
+          <div class="battle-stats">
+            <p class="attack">Attack:</p>
+            <p class="defense">Defense:</p>
+          </div>
+          <div class="hitpoints-container">
+            <p class="hitpoints">/</p>
+            <div class="hitpoints-bar">
+              <div class="hitpoints-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fighter-box" id="clara">
+        <div class="buff-box">
+          <div class="buffs">
+            <img
+              class="attack-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737326130630706/atkup.png?ex=66051d43&is=65f2a843&hm=d2439ddb8d1bd9fe151a150e4fb7c1d3aa3940987a17611d9c87225453f6b59a&"
+              alt="Attack Buff"
+            />
+            <img
+              class="defense-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217736513635487804/defup.png?ex=66051c81&is=65f2a781&hm=0712257ef5136f35dabdb986c089b3c4835f3760ade69678ea3852ee6e2b84ab&"
+              alt="Defense Buff"
+            />
+            <img
+              class="speed-buff"
+              src="https://media.discordapp.net/attachments/1097230681530192017/1217736262052745266/spdup.png?ex=66051c45&is=65f2a745&hm=56a61e8f506ef877ca04d2b9b895874afd91a499e4f9cbf3dde578ddc169bcb0&=&format=webp&quality=lossless&width=680&height=680"
+              alt="Speed Buff"
+            />
+            <img
+              class="heal-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737325602279434/heal.png?ex=66051d42&is=65f2a842&hm=1706f7ea5d27848890682d56c33ff7a7bdba75a9f5786c58b9c220b0f2185dd5&"
+              alt="Heal Buff"
+            />
+            <img
+              class="random-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737324994232401/random.png?ex=66051d42&is=65f2a842&hm=5e654ea0c908c6a5103e2bd7dbb22d58277205c8a53059e002557aeed21486df&"
+              alt="Random Buff"
+            />
+          </div>
+          <div class="debuffs">
+            <img
+              class="burn-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440448507994/fireDebuff.png?ex=660517c7&is=65f2a2c7&hm=a3040b1316b85e0d7ee7d0017bf9cad1f0e7154e6cd002c02382d43f742f453f&"
+              alt="Burn Debuff"
+            />
+            <img
+              class="stun-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731441157214279/stundebuff.png?ex=660517c7&is=65f2a2c7&hm=4aa020c40f1e727c1b22b2ef5969f71dde467ffaf75d2bf662ed3112602a42b8&"
+              alt="Stun Debuff"
+            />
+            <img
+              class="attack-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731438842089482/atkdn.png?ex=660517c7&is=65f2a2c7&hm=49f265045277bc9a70ed604c344ca184ccafed3c004c67604c48a4448d347f8d&"
+              alt="Attack Debuff"
+            />
+            <img
+              class="defense-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731439253000252/defdn.png?ex=660517c7&is=65f2a2c7&hm=42279dbf34b27ebc80100047ed83bd8bbf92e864cb8e221e632b6a27f0ddbd71&"
+              alt="Defense Debuff"
+            />
+            <img
+              class="speed-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440867803206/spddn.png?ex=660517c7&is=65f2a2c7&hm=5c9a8f74d4ca18f7d1aa93a1804a14f2e0ed018fc660fbe6c643b6f6adf4a3ef&"
+              alt="Speed Debuff"
+            />
+          </div>
+        </div>
+        <div class="image-box">
+          <div class="skill-box">
+            <div class="firstSkill-box">
+              <button class="firstSkill-btn">
+                <img
+                  class="firstSkill"
+                  src="https://cdn.midjourney.com/28074924-5646-4fed-9beb-7464fa368b71/0_1.webp"
+                  alt="Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSkill-cd">
+                <span class="firstSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSkill-box">
+              <button class="secondSkill-btn">
+                <img
+                  class="secondSkill"
+                  src="https://cdn.midjourney.com/8a8efb76-f9d1-432e-8a79-a75c5e77cd56/0_0.webp"
+                  alt="Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSkill-cd">
+                <span class="secondSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="thirdSkill-box">
+              <button class="thirdSkill-btn">
+                <img
+                  class="thirdSkill"
+                  src="https://cdn.midjourney.com/fc15b3db-74e5-4f91-a930-a6584409c008/0_2.webp"
+                  alt="Skill 3 Icon"
+                />
+              </button>
+              <div class="thirdSkill-cd">
+                <span class="thirdSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+          <div class="fighter">
+            <img
+              class="healthy fire"
+              id="frh"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405942853795890/fire-rogue-ready.png?ex=6603e8a3&is=65f173a3&hm=6c4334d50778e042e7e554760d475b87c20fc66d5dd633bfbeea3582e14ba6a1&"
+              alt="Healthy Fire Rogue"
+            />
+            <img
+              class="injured fire"
+              id="fri"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405942354808832/fire-rogue-injured.png?ex=6603e8a2&is=65f173a2&hm=9ffcbf46303b5246c7eb0af6cb5146f3a8cdbd737668efcfb7e28d01e24b89f4&"
+              alt="Injured Fire Rogue"
+            />
+            <img
+              class="dead fire"
+              id="frd"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405941834842155/fire-rogue-dead.png?ex=6603e8a2&is=65f173a2&hm=5565705ba8d4cad56352c3f9a9ccb305e60c8f7ac763522232a89550236fca62&"
+              alt="Dead Fire Rogue"
+            />
+            <div class="hit-overlay"></div>
+            <div class="heal-overlay"></div>
+            <div class="dead-overlay"></div>
+          </div>
+          <div class="special-skill-box">
+            <div class="firstSpecialSkill-box">
+              <button class="firstSpecialSkill-btn">
+                <img
+                  class="firstSpecialSkill"
+                  src="https://cdn.midjourney.com/6f7b1747-57e5-4ee3-a649-c83ee8022b62/0_3.webp"
+                  alt="Class Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSpecialSkill-cd">
+                <span class="firstSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSpecialSkill-box">
+              <button class="secondSpecialSkill-btn">
+                <img
+                  class="secondSpecialSkill"
+                  src="https://cdn.midjourney.com/b697b1a9-682a-4738-9a4d-10e1db63fc59/0_2.webp"
+                  alt="Class Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSpecialSkill-cd">
+                <span class="secondSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="initiative-container">
+            <div class="initiative-bar">
+              <div class="initiative-progress"></div>
+            </div>
+          </div>
+          <div class="battle-stats">
+            <p class="attack">Attack:</p>
+            <p class="defense">Defense:</p>
+          </div>
+          <div class="hitpoints-container">
+            <p class="hitpoints">/</p>
+            <div class="hitpoints-bar">
+              <div class="hitpoints-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="bottom-battle-box">
+      <div class="fighter-box" id="fiona">
+        <div class="buff-box">
+          <div class="buffs">
+            <img
+              class="attack-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737326130630706/atkup.png?ex=66051d43&is=65f2a843&hm=d2439ddb8d1bd9fe151a150e4fb7c1d3aa3940987a17611d9c87225453f6b59a&"
+              alt="Attack Buff"
+            />
+            <img
+              class="defense-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217736513635487804/defup.png?ex=66051c81&is=65f2a781&hm=0712257ef5136f35dabdb986c089b3c4835f3760ade69678ea3852ee6e2b84ab&"
+              alt="Defense Buff"
+            />
+            <img
+              class="speed-buff"
+              src="https://media.discordapp.net/attachments/1097230681530192017/1217736262052745266/spdup.png?ex=66051c45&is=65f2a745&hm=56a61e8f506ef877ca04d2b9b895874afd91a499e4f9cbf3dde578ddc169bcb0&=&format=webp&quality=lossless&width=680&height=680"
+              alt="Speed Buff"
+            />
+            <img
+              class="heal-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737325602279434/heal.png?ex=66051d42&is=65f2a842&hm=1706f7ea5d27848890682d56c33ff7a7bdba75a9f5786c58b9c220b0f2185dd5&"
+              alt="Heal Buff"
+            />
+            <img
+              class="random-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737324994232401/random.png?ex=66051d42&is=65f2a842&hm=5e654ea0c908c6a5103e2bd7dbb22d58277205c8a53059e002557aeed21486df&"
+              alt="Random Buff"
+            />
+          </div>
+          <div class="debuffs">
+            <img
+              class="burn-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440448507994/fireDebuff.png?ex=660517c7&is=65f2a2c7&hm=a3040b1316b85e0d7ee7d0017bf9cad1f0e7154e6cd002c02382d43f742f453f&"
+              alt="Burn Debuff"
+            />
+            <img
+              class="stun-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731441157214279/stundebuff.png?ex=660517c7&is=65f2a2c7&hm=4aa020c40f1e727c1b22b2ef5969f71dde467ffaf75d2bf662ed3112602a42b8&"
+              alt="Stun Debuff"
+            />
+            <img
+              class="attack-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731438842089482/atkdn.png?ex=660517c7&is=65f2a2c7&hm=49f265045277bc9a70ed604c344ca184ccafed3c004c67604c48a4448d347f8d&"
+              alt="Attack Debuff"
+            />
+            <img
+              class="defense-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731439253000252/defdn.png?ex=660517c7&is=65f2a2c7&hm=42279dbf34b27ebc80100047ed83bd8bbf92e864cb8e221e632b6a27f0ddbd71&"
+              alt="Defense Debuff"
+            />
+            <img
+              class="speed-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440867803206/spddn.png?ex=660517c7&is=65f2a2c7&hm=5c9a8f74d4ca18f7d1aa93a1804a14f2e0ed018fc660fbe6c643b6f6adf4a3ef&"
+              alt="Speed Debuff"
+            />
+          </div>
+        </div>
+        <div class="image-box">
+          <div class="skill-box">
+            <div class="firstSkill-box">
+              <button class="firstSkill-btn">
+                <img
+                  class="firstSkill"
+                  src="https://cdn.midjourney.com/e02b6080-8ac8-4eb0-b4e7-8048105562dc/0_0.webp"
+                  alt="Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSkill-cd">
+                <span class="firstSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSkill-box">
+              <button class="secondSkill-btn">
+                <img
+                  class="secondSkill"
+                  src="https://cdn.midjourney.com/2ad1c91a-0167-43c0-9b45-c101679f0b1e/0_3.webp"
+                  alt="Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSkill-cd">
+                <span class="secondSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="thirdSkill-box">
+              <button class="thirdSkill-btn">
+                <img
+                  class="thirdSkill"
+                  src="https://cdn.midjourney.com/d34e7f83-ac8b-4208-b733-acbb385bb3e3/0_1.webp"
+                  alt="Skill 3 Icon"
+                />
+              </button>
+              <div class="thirdSkill-cd">
+                <span class="thirdSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+          <div class="fighter">
+            <img
+              class="healthy earth"
+              id="edh"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405757893644338/earth-druid-ready.png?ex=6603e876&is=65f17376&hm=160792a18ee84ef83418e4c4baa21d13c7af23ab9714034b2cb4cc3ad1a03bef&"
+              alt="Healthy Earth Druid"
+            />
+            <img
+              class="injured earth"
+              id="edi"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405757604233276/earth-druid-injured.png?ex=6603e876&is=65f17376&hm=1ba346f60645bd3a4d692a1c5b234dcbfb0d5d5d625ed2c271e642e9954ae792&"
+              alt="Injured Earth Druid"
+            />
+            <img
+              class="dead earth"
+              id="edd"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405757218099251/earth-druid-dead.png?ex=6603e876&is=65f17376&hm=4b746272b68522d69830c50ff1d02e7dc8783545e775fb22af6283ef41ab57d0&"
+              alt="Dead Earth Druid"
+            />
+            <div class="hit-overlay"></div>
+            <div class="heal-overlay"></div>
+            <div class="dead-overlay"></div>
+          </div>
+          <div class="special-skill-box">
+            <div class="firstSpecialSkill-box">
+              <button class="firstSpecialSkill-btn">
+                <img
+                  class="firstSpecialSkill"
+                  src="https://cdn.midjourney.com/be480870-8d16-44b8-9478-db80f040d133/0_2.webp"
+                  alt="Class Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSpecialSkill-cd">
+                <span class="firstSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSpecialSkill-box">
+              <button class="secondSpecialSkill-btn">
+                <img
+                  class="secondSpecialSkill"
+                  src="https://cdn.midjourney.com/9605fd73-2305-44f5-8701-da076d386017/0_0_384_N.webp?method=shortest&qst=6&quality=15"
+                  alt="Class Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSpecialSkill-cd">
+                <span class="secondSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="initiative-container">
+            <div class="initiative-bar">
+              <div class="initiative-progress"></div>
+            </div>
+          </div>
+          <div class="battle-stats">
+            <p class="attack">Attack:</p>
+            <p class="defense">Defense:</p>
+          </div>
+          <div class="hitpoints-container">
+            <p class="hitpoints">/</p>
+            <div class="hitpoints-bar">
+              <div class="hitpoints-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fighter-box" id="alex">
+        <div class="buff-box">
+          <div class="buffs">
+            <img
+              class="attack-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737326130630706/atkup.png?ex=66051d43&is=65f2a843&hm=d2439ddb8d1bd9fe151a150e4fb7c1d3aa3940987a17611d9c87225453f6b59a&"
+              alt="Attack Buff"
+            />
+            <img
+              class="defense-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217736513635487804/defup.png?ex=66051c81&is=65f2a781&hm=0712257ef5136f35dabdb986c089b3c4835f3760ade69678ea3852ee6e2b84ab&"
+              alt="Defense Buff"
+            />
+            <img
+              class="speed-buff"
+              src="https://media.discordapp.net/attachments/1097230681530192017/1217736262052745266/spdup.png?ex=66051c45&is=65f2a745&hm=56a61e8f506ef877ca04d2b9b895874afd91a499e4f9cbf3dde578ddc169bcb0&=&format=webp&quality=lossless&width=680&height=680"
+              alt="Speed Buff"
+            />
+            <img
+              class="heal-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737325602279434/heal.png?ex=66051d42&is=65f2a842&hm=1706f7ea5d27848890682d56c33ff7a7bdba75a9f5786c58b9c220b0f2185dd5&"
+              alt="Heal Buff"
+            />
+            <img
+              class="random-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737324994232401/random.png?ex=66051d42&is=65f2a842&hm=5e654ea0c908c6a5103e2bd7dbb22d58277205c8a53059e002557aeed21486df&"
+              alt="Random Buff"
+            />
+          </div>
+          <div class="debuffs">
+            <img
+              class="burn-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440448507994/fireDebuff.png?ex=660517c7&is=65f2a2c7&hm=a3040b1316b85e0d7ee7d0017bf9cad1f0e7154e6cd002c02382d43f742f453f&"
+              alt="Burn Debuff"
+            />
+            <img
+              class="stun-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731441157214279/stundebuff.png?ex=660517c7&is=65f2a2c7&hm=4aa020c40f1e727c1b22b2ef5969f71dde467ffaf75d2bf662ed3112602a42b8&"
+              alt="Stun Debuff"
+            />
+            <img
+              class="attack-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731438842089482/atkdn.png?ex=660517c7&is=65f2a2c7&hm=49f265045277bc9a70ed604c344ca184ccafed3c004c67604c48a4448d347f8d&"
+              alt="Attack Debuff"
+            />
+            <img
+              class="defense-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731439253000252/defdn.png?ex=660517c7&is=65f2a2c7&hm=42279dbf34b27ebc80100047ed83bd8bbf92e864cb8e221e632b6a27f0ddbd71&"
+              alt="Defense Debuff"
+            />
+            <img
+              class="speed-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440867803206/spddn.png?ex=660517c7&is=65f2a2c7&hm=5c9a8f74d4ca18f7d1aa93a1804a14f2e0ed018fc660fbe6c643b6f6adf4a3ef&"
+              alt="Speed Debuff"
+            />
+          </div>
+        </div>
+        <div class="image-box">
+          <div class="skill-box">
+            <div class="firstSkill-box">
+              <button class="firstSkill-btn">
+                <img
+                  class="firstSkill"
+                  src="https://cdn.midjourney.com/797b01fe-ee55-45d2-a1bd-12635809b2e0/0_1.webp"
+                  alt="Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSkill-cd">
+                <span class="firstSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSkill-box">
+              <button class="secondSkill-btn">
+                <img
+                  class="secondSkill"
+                  src="https://cdn.midjourney.com/4a513281-da0e-42e9-8a56-7f0329b625e5/0_0.webp"
+                  alt="Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSkill-cd">
+                <span class="secondSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="thirdSkill-box">
+              <button class="thirdSkill-btn">
+                <img
+                  class="thirdSkill"
+                  src="https://cdn.midjourney.com/cc1f2a84-aa9b-4ec8-b2d0-16b858ccb8c0/0_1_384_N.webp?method=shortest&qst=6&quality=15"
+                  alt="Skill 3 Icon"
+                />
+              </button>
+              <div class="thirdSkill-cd">
+                <span class="thirdSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+          <div class="fighter">
+            <img
+              class="healthy water"
+              id="whh"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405980514455552/water-hunter-ready.png?ex=6603e8ac&is=65f173ac&hm=6b2186c5d34579ed104a2fa2ef6c219242116e7fc0cce7c0506085164c6a5d63&"
+              alt="Healthy Water Hunter"
+            />
+            <img
+              class="injured water"
+              id="whi"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405981558837248/water-hunter-injured.png?ex=6603e8ac&is=65f173ac&hm=d4b8a02e48a07aebcfc9b21eebacca68906379e2a36a64edf717d6c9d3cfc7dd&"
+              alt="Injured Water Hunter"
+            />
+            <img
+              class="dead water"
+              id="whd"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405981064171530/water-hunter-dead.png?ex=6603e8ac&is=65f173ac&hm=34fdaf53d5ed57db217d9d1dce991ac48282efbb15e8aebec40d3fc9757a713b&"
+              alt="Dead Water Hunter"
+            />
+            <div class="hit-overlay"></div>
+            <div class="heal-overlay"></div>
+            <div class="dead-overlay"></div>
+          </div>
+          <div class="special-skill-box">
+            <div class="firstSpecialSkill-box">
+              <button class="firstSpecialSkill-btn">
+                <img
+                  class="firstSpecialSkill"
+                  src="https://cdn.midjourney.com/d8623599-0b57-4648-8d4e-b352e1ac0269/0_2.webp"
+                  alt="Class Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSpecialSkill-cd">
+                <span class="firstSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSpecialSkill-box">
+              <button class="secondSpecialSkill-btn">
+                <img
+                  class="secondSpecialSkill"
+                  src="https://cdn.midjourney.com/bcbfd622-d929-4e0b-bb19-c51217a9b968/0_3.webp"
+                  alt="Class Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSpecialSkill-cd">
+                <span class="secondSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="initiative-container">
+            <div class="initiative-bar">
+              <div class="initiative-progress"></div>
+            </div>
+          </div>
+          <div class="battle-stats">
+            <p class="attack">Attack:</p>
+            <p class="defense">Defense:</p>
+          </div>
+          <div class="hitpoints-container">
+            <p class="hitpoints">/</p>
+            <div class="hitpoints-bar">
+              <div class="hitpoints-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fighter-box" id="maeve">
+        <div class="buff-box">
+          <div class="buffs">
+            <img
+              class="attack-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737326130630706/atkup.png?ex=66051d43&is=65f2a843&hm=d2439ddb8d1bd9fe151a150e4fb7c1d3aa3940987a17611d9c87225453f6b59a&"
+              alt="Attack Buff"
+            />
+            <img
+              class="defense-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217736513635487804/defup.png?ex=66051c81&is=65f2a781&hm=0712257ef5136f35dabdb986c089b3c4835f3760ade69678ea3852ee6e2b84ab&"
+              alt="Defense Buff"
+            />
+            <img
+              class="speed-buff"
+              src="https://media.discordapp.net/attachments/1097230681530192017/1217736262052745266/spdup.png?ex=66051c45&is=65f2a745&hm=56a61e8f506ef877ca04d2b9b895874afd91a499e4f9cbf3dde578ddc169bcb0&=&format=webp&quality=lossless&width=680&height=680"
+              alt="Speed Buff"
+            />
+            <img
+              class="heal-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737325602279434/heal.png?ex=66051d42&is=65f2a842&hm=1706f7ea5d27848890682d56c33ff7a7bdba75a9f5786c58b9c220b0f2185dd5&"
+              alt="Heal Buff"
+            />
+            <img
+              class="random-buff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217737324994232401/random.png?ex=66051d42&is=65f2a842&hm=5e654ea0c908c6a5103e2bd7dbb22d58277205c8a53059e002557aeed21486df&"
+              alt="Random Buff"
+            />
+          </div>
+          <div class="debuffs">
+            <img
+              class="burn-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440448507994/fireDebuff.png?ex=660517c7&is=65f2a2c7&hm=a3040b1316b85e0d7ee7d0017bf9cad1f0e7154e6cd002c02382d43f742f453f&"
+              alt="Burn Debuff"
+            />
+            <img
+              class="stun-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731441157214279/stundebuff.png?ex=660517c7&is=65f2a2c7&hm=4aa020c40f1e727c1b22b2ef5969f71dde467ffaf75d2bf662ed3112602a42b8&"
+              alt="Stun Debuff"
+            />
+            <img
+              class="attack-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731438842089482/atkdn.png?ex=660517c7&is=65f2a2c7&hm=49f265045277bc9a70ed604c344ca184ccafed3c004c67604c48a4448d347f8d&"
+              alt="Attack Debuff"
+            />
+            <img
+              class="defense-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731439253000252/defdn.png?ex=660517c7&is=65f2a2c7&hm=42279dbf34b27ebc80100047ed83bd8bbf92e864cb8e221e632b6a27f0ddbd71&"
+              alt="Defense Debuff"
+            />
+            <img
+              class="speed-debuff"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217731440867803206/spddn.png?ex=660517c7&is=65f2a2c7&hm=5c9a8f74d4ca18f7d1aa93a1804a14f2e0ed018fc660fbe6c643b6f6adf4a3ef&"
+              alt="Speed Debuff"
+            />
+          </div>
+        </div>
+        <div class="image-box">
+          <div class="skill-box">
+            <div class="firstSkill-box">
+              <button class="firstSkill-btn">
+                <img
+                  class="firstSkill"
+                  src="https://cdn.midjourney.com/28074924-5646-4fed-9beb-7464fa368b71/0_1.webp"
+                  alt="Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSkill-cd">
+                <span class="firstSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSkill-box">
+              <button class="secondSkill-btn">
+                <img
+                  class="secondSkill"
+                  src="https://cdn.midjourney.com/8a8efb76-f9d1-432e-8a79-a75c5e77cd56/0_0.webp"
+                  alt="Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSkill-cd">
+                <span class="secondSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="thirdSkill-box">
+              <button class="thirdSkill-btn">
+                <img
+                  class="thirdSkill"
+                  src="https://cdn.midjourney.com/fc15b3db-74e5-4f91-a930-a6584409c008/0_2.webp"
+                  alt="Skill 3 Icon"
+                />
+              </button>
+              <div class="thirdSkill-cd">
+                <span class="thirdSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+          <div class="fighter">
+            <img
+              class="healthy fire"
+              id="fmh"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405902248874075/fire-mage-ready.png?ex=6603e899&is=65f17399&hm=dfa439fb182ee1e9f3960055c4d7c13f21cfbde748fade7ccee22670cc4432af&"
+              alt="Healthy Fire Mage"
+            />
+            <img
+              class="injured fire"
+              id="fmi"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405901682769930/fire-mage-injured.png?ex=6603e899&is=65f17399&hm=53c9418247d32c3f258eeaaa1e20fb3bf9104ecec6d85d2457009dde3ee6e427&"
+              alt="Injured Fire Mage"
+            />
+            <img
+              class="dead fire"
+              id="fmd"
+              src="https://cdn.discordapp.com/attachments/1097230681530192017/1217405901149966336/fire-mage-dead.png?ex=6603e899&is=65f17399&hm=96e5f53627fe72acc41f6ce9438d87d0de3eae085f24eef43bbc04f3cb2a03c5&"
+              alt="Dead Fire Mage"
+            />
+            <div class="hit-overlay"></div>
+            <div class="heal-overlay"></div>
+            <div class="dead-overlay"></div>
+          </div>
+          <div class="special-skill-box">
+            <div class="firstSpecialSkill-box">
+              <button class="firstSpecialSkill-btn">
+                <img
+                  class="firstSpecialSkill"
+                  src="https://cdn.midjourney.com/0859d2d6-a68b-4833-8cd5-3f9bf98c5e4a/0_2.webp"
+                  alt="Class Skill 1 Icon"
+                />
+              </button>
+              <div class="firstSpecialSkill-cd">
+                <span class="firstSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+            <div class="secondSpecialSkill-box">
+              <button class="secondSpecialSkill-btn">
+                <img
+                  class="secondSpecialSkill"
+                  src="https://cdn.midjourney.com/dfffa2e8-bc51-4ab8-a8ea-19386b137c6f/0_3.webp"
+                  alt="Class Skill 2 Icon"
+                />
+              </button>
+              <div class="secondSpecialSkill-cd">
+                <span class="secondSpecialSkill-cd-text"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="initiative-container">
+            <div class="initiative-bar">
+              <div class="initiative-progress"></div>
+            </div>
+          </div>
+          <div class="battle-stats">
+            <p class="attack">Attack:</p>
+            <p class="defense">Defense:</p>
+          </div>
+          <div class="hitpoints-container">
+            <p class="hitpoints">/</p>
+            <div class="hitpoints-bar">
+              <div class="hitpoints-progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer-box">
+      <button id="start-battle">Start Battle</button>
+      <div id="log"></div>
+    </div>
+    <script src="./battle-royale.js"></script>
+  </body>
+</html>

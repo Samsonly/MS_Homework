@@ -1,0 +1,674 @@
+body {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  font-size: 30px;
+  line-height: 0.4;
+  text-wrap: nowrap;
+}
+
+#heading-box {
+  border: solid white;
+  border-width: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  flex-wrap: nowrap;
+}
+
+#top-battle-box {
+  display: flex;
+  border: solid white;
+  justify-content: space-evenly;
+  align-items: center;
+  border-width: 1px;
+  flex: 1;
+  padding: 10px 20px;
+}
+
+#bottom-battle-box {
+  display: flex;
+  border: solid white;
+  border-width: 1px;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  flex: 1;
+}
+
+#footer-box {
+  border: solid white;
+  border-width: 1px;
+  display: flex;
+  height: 100px;
+}
+
+.water {
+  border: solid 2px blue;
+}
+
+.fire {
+  border: solid 2px red;
+}
+
+.earth {
+  border: solid 4px green;
+}
+
+.fighter-box {
+  display: flex;
+  flex-direction: column;
+  border: solid 5px black;
+  padding: 10px;
+}
+
+.buff-box {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 56px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 4px;
+}
+
+.image-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.stats-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  line-height: 0.1;
+  padding-top: 5px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.battle-stats {
+  display: flex;
+  color: white;
+  font-size: 12px;
+  line-height: 0.1;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.fighter {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+}
+
+#alex {
+  align-self: flex-end;
+  margin-top: 60px;
+}
+
+#felix {
+  align-self: flex-start;
+  margin-bottom: 60px;
+}
+
+#edh {
+  width: 150px;
+  height: 150px;
+}
+
+#edi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#edd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#ewh {
+  width: 150px;
+  height: 150px;
+}
+
+#ewi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#ewd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#frh {
+  width: 150px;
+  height: 150px;
+}
+
+#fri {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#frd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#fmh {
+  width: 150px;
+  height: 150px;
+}
+
+#fmi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#fmd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#whh {
+  width: 150px;
+  height: 150px;
+}
+
+#whi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#whd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#wsh {
+  width: 150px;
+  height: 150px;
+}
+
+#wsi {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+#wsd {
+  width: 150px;
+  height: 150px;
+  display: none;
+}
+
+.hit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 0, 0, 0.25);
+  display: none;
+}
+
+.heal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 255, 42, 0.25);
+  display: none;
+}
+
+.dead-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(176, 190, 178, 0.5);
+  display: none;
+}
+
+.status {
+  display: flex;
+  flex-direction: row;
+  border: solid 1px white;
+  border-radius: 3px;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 12px;
+  line-height: 0.1;
+  padding-left: 5px;
+  width: 60%;
+}
+
+.buffs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2px;
+}
+
+.random-buff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.speed-buff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.attack-buff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.defense-buff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.heal-buff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.debuffs {
+  display: flex;
+  justify-content: space-around;
+}
+
+.burn-debuff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.speed-debuff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.attack-debuff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.defense-debuff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+.stun-debuff {
+  width: 25px;
+  height: 25px;
+  display: none;
+  border: solid 1px white;
+  border-radius: 5px;
+}
+
+#log {
+  width: 100%;
+  padding-left: 10px;
+  color: white;
+  line-height: 0;
+  font-size: 18px;
+  overflow: auto;
+}
+
+.skill-box {
+  height: 150px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.special-skill-box {
+  height: 150px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+}
+
+.firstSkill-box {
+  position: relative;
+}
+
+.firstSkill {
+  width: 40px;
+  height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.firstSkill-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.firstSkill-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.firstSkill-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.secondSkill-box {
+  position: relative;
+}
+
+.secondSkill {
+  width: 40px;
+  height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.secondSkill-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.secondSkill-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.secondSkill-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.thirdSkill-box {
+  position: relative;
+}
+
+.thirdSkill {
+  width: 40px;
+  height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.thirdSkill-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.thirdSkill-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.thirdSkill-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.firstSpecialSkill-box {
+  position: relative;
+}
+
+.firstSpecialSkill {
+  width: 40px;
+  height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.firstSpecialSkill-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.firstSpecialSkill-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.firstSpecialSkill-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.secondSpecialSkill-box {
+  position: relative;
+}
+
+.secondSpecialSkill {
+  width: 40px;
+  height: 40px;
+  border: solid 1px white;
+  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.secondSpecialSkill-cd {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(118, 118, 118, 0.843);
+  display: none;
+}
+
+.secondSpecialSkill-cd-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.secondSpecialSkill-btn {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+#log {
+  display: none;
+}
+
+.hitpoints-progress {
+  width: 100%;
+  height: 20px;
+  background-color: green;
+}
+
+.hitpoints-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.hitpoints {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hitpoints-bar {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  border: solid 1px white;
+  border-radius: 3px;
+  background-color: black;
+}
+
+.current-hitpoints {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.attack {
+  display: flex;
+  width: 50%;
+}
+.defense {
+  display: flex;
+  width: 50%;
+}
+
+.initiative-progress {
+  width: 100%;
+  height: 6px;
+
+  background-color: yellowgreen;
+  z-index: 4;
+}
+
+.initiative-container {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.initiative-bar {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 3px;
+  border: solid 1px white;
+  border-radius: 2px;
+  background-color: black;
+}
+
+#start-battle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  font-size: 60px;
+  color: blue;
+  background-color: black;
+  border: solid 2px white;
+  border-radius: 10px;
+  z-index: 10;
+}
